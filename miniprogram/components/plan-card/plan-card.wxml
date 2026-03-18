@@ -1,0 +1,28 @@
+<!-- components/plan-card/plan-card.wxml — 方案卡片 -->
+<view class="plan-card {{animateIn ? 'animate-in' : ''}}" bindtap="onTap">
+  <!-- Source badge -->
+  <view class="source-badge" wx:if="{{plan.source_type}}">
+    <text wx:if="{{plan.source_type === 'xiaohongshu'}}">📕小红书热门</text>
+    <text wx:else>🤖AI推荐</text>
+  </view>
+
+  <view class="card-header">
+    <text class="card-emoji">{{plan.emoji}}</text>
+    <text class="card-title">{{plan.title}}</text>
+  </view>
+  <text class="card-desc">{{plan.description}}</text>
+  <view class="card-meta">
+    <text class="meta-item">⏱ {{plan.duration}}</text>
+    <text class="meta-item">💰 {{plan.cost_range}}</text>
+    <text class="meta-item">🚇 {{plan.transport}}</text>
+  </view>
+  <view class="card-footer">
+    <view class="card-tags">
+      <text wx:for="{{plan.tags}}" wx:key="*this" class="tag">{{item}}</text>
+    </view>
+    <view class="card-stats">
+      <text class="stat">📍{{plan.stops_count}}站</text>
+      <text class="stat">📚{{plan.source_count}}源</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,95 @@
+<!-- pages/plan-detail/plan-detail.wxml — 方案详情 -->
+<view class="detail-container" wx:if="{{plan}}">
+  <!-- 标题 -->
+  <view class="detail-header">
+    <text class="detail-title">{{plan.title}}</text>
+  </view>
+
+  <!-- 站点列表 (Timeline) -->
+  <view class="stops-section">
+    <text class="section-title">📍 路线</text>
+    <view class="timeline">
+      <view wx:for="{{plan.stops}}" wx:key="name" class="timeline-item">
+        <!-- Timeline dot & line -->
+        <view class="timeline-left">
+          <view class="timeline-dot"></view>
+          <view wx:if="{{index < plan.stops.length - 1}}" class="timeline-line"></view>
+        </view>
+
+        <!-- Stop content -->
+        <view class="timeline-content">
+          <view class="stop-header">
+            <text class="stop-time">{{item.arrive_at}}</text>
+            <text class="stop-name">{{item.name}}</text>
+          </view>
+          <text class="stop-duration">停留 {{item.stay_duration}}</text>
+          <text class="stop-rec">{{item.recommendation}}</text>
+
+          <!-- Nav button -->
+          <view 
+            wx:if="{{item.nav_link}}" 
+            class="nav-btn" 
+            bindtap="onNavigate"
+            data-name="{{item.name}}"
+            data-nav-link="{{item.nav_link}}"
+          >
+            <text>🧭 导航前往</text>
+          </view>
+
+          <!-- Walk to next -->
+          <view wx:if="{{item.walk_to_next}}" class="walk-info">
+            <text>🚶 {{item.walk_to_next}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Tips -->
+  <view class="tips-section" wx:if="{{plan.tips.length > 0}}">
+    <text class="section-title">💡 贴心提示</text>
+    <view wx:for="{{plan.tips}}" wx:key="*this" class="tip-item">
+      <text class="tip-dot">•</text>
+      <text class="tip-text">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 数据来源 -->
+  <view class="sources-section" wx:if="{{plan.sources.length > 0}}">
+    <text class="section-title">📚 数据来源</text>
+    <view wx:for="{{plan.sources}}" wx:key="title" class="source-item">
+      <text class="source-title">{{item.title}}</text>
+      <text class="source-likes">❤️ {{item.likes}}</text>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{loading}}" class="loading-skeleton">
+  <!-- Skeleton: title -->
+  <view class="skeleton skeleton-title"></view>
+
+  <!-- Skeleton: section label -->
+  <view class="skeleton skeleton-section-label"></view>
+
+  <!-- Skeleton: timeline stops -->
+  <view class="skeleton-timeline">
+    <view class="skeleton-stop" wx:for="{{[1,2,3]}}" wx:key="*this">
+      <view class="skeleton-dot-col">
+        <view class="skeleton skeleton-dot"></view>
+        <view wx:if="{{index < 2}}" class="skeleton skeleton-line"></view>
+      </view>
+      <view class="skeleton-stop-body">
+        <view class="skeleton skeleton-stop-header"></view>
+        <view class="skeleton skeleton-stop-sub"></view>
+        <view class="skeleton skeleton-stop-text"></view>
+        <view class="skeleton skeleton-stop-btn"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Skeleton: tips -->
+  <view class="skeleton-tips">
+    <view class="skeleton skeleton-tip-line"></view>
+    <view class="skeleton skeleton-tip-line"></view>
+  </view>
+</view>

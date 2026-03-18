@@ -1,0 +1,10 @@
+<!-- pages/profile/profile.wxml -->
+<view class="profile-container">
+  <view class="profile-header">
+    <text class="profile-title">我的周末</text>
+  </view>
+
+  <view wx:if="{{historyPlans.length === 0}}" class="empty-state">
+    <text>还没有历史方案\n去聊天页开始你的周末计划吧 🎉</text>
+  </view>
+</view>

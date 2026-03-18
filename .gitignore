@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+*.egg
+dist/
+build/
+.venv/
+venv/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# WeChat devtools
+miniprogram/node_modules/
+miniprogram/miniprogram_npm/
+*.cookies.json
+logs/

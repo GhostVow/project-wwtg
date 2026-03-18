@@ -1,0 +1,13 @@
+{
+  "appid": "wx0000000000000000",
+  "projectname": "wwtg-miniprogram",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "condition": {}
+}

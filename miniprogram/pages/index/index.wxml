@@ -1,0 +1,69 @@
+<!-- pages/index/index.wxml — 聊天界面 -->
+<view class="chat-container">
+  <!-- 消息列表 -->
+  <scroll-view 
+    class="message-list" 
+    scroll-y 
+    scroll-into-view="{{scrollToView}}"
+    scroll-with-animation
+  >
+    <block wx:for="{{messages}}" wx:key="id">
+      <!-- 普通消息气泡 -->
+      <view wx:if="{{item.role === 'user' || item.role === 'assistant'}}" id="{{item.id}}" class="message-row {{item.role}}">
+        <view class="bubble {{item.role}}-bubble">
+          <text>{{item.content}}</text>
+        </view>
+      </view>
+
+      <!-- 方案卡片 -->
+      <view wx:if="{{item.role === 'plan_card'}}" id="{{item.id}}" class="message-row assistant plan-card-row">
+        <plan-card 
+          plan="{{item.content}}" 
+          bindplantap="onPlanTap" 
+          data-plan-id="{{item.content.plan_id}}"
+        />
+      </view>
+
+      <!-- 操作按钮 -->
+      <view wx:if="{{item.role === 'actions'}}" id="{{item.id}}" class="message-row assistant">
+        <view class="actions-container">
+          <button 
+            wx:for="{{item.content.options}}" 
+            wx:for-item="opt"
+            wx:key="key"
+            class="action-btn {{opt.key === 'reject' ? 'action-btn-outline' : 'action-btn-primary'}}"
+            data-action="{{opt.key}}"
+            bindtap="onActionTap"
+          >{{opt.label}}</button>
+        </view>
+      </view>
+    </block>
+
+    <!-- 加载指示器 -->
+    <view wx:if="{{loading}}" class="message-row assistant">
+      <view class="bubble assistant-bubble loading-bubble">
+        <view class="loading-dots">
+          <text class="dot dot1">·</text>
+          <text class="dot dot2">·</text>
+          <text class="dot dot3">·</text>
+        </view>
+        <text class="loading-text">{{loadingText}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-area">
+    <textarea 
+      class="chat-input" 
+      value="{{inputValue}}" 
+      bindinput="onInput" 
+      bindconfirm="onSend"
+      placeholder="告诉我你的周末计划..." 
+      confirm-type="send"
+      auto-height
+      maxlength="500"
+    />
+    <button class="send-btn" bindtap="onSend" disabled="{{loading || !inputValue}}">发送</button>
+  </view>
+</view>

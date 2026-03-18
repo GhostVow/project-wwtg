@@ -1,0 +1,147 @@
+/* pages/index/index.wxss — 聊天页样式 */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #F5F5F5;
+}
+
+.message-list {
+  flex: 1;
+  padding: 20rpx;
+  overflow-y: auto;
+}
+
+.message-row {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.message-row.assistant {
+  justify-content: flex-start;
+}
+
+.plan-card-row {
+  width: 100%;
+}
+
+.bubble {
+  max-width: 70%;
+  padding: 20rpx 28rpx;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.user-bubble {
+  background-color: #FF6B35;
+  color: #fff;
+  border-bottom-right-radius: 6rpx;
+}
+
+.assistant-bubble {
+  background-color: #fff;
+  color: #333;
+  border-bottom-left-radius: 6rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
+}
+
+.loading-bubble {
+  color: #999;
+  display: flex;
+  align-items: center;
+}
+
+.loading-dots {
+  display: inline-flex;
+  margin-right: 8rpx;
+}
+
+.dot {
+  font-size: 48rpx;
+  font-weight: bold;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+.dot1 { animation-delay: 0s; }
+.dot2 { animation-delay: 0.2s; }
+.dot3 { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { opacity: 0.3; }
+  40% { opacity: 1; }
+}
+
+.loading-text {
+  font-size: 26rpx;
+}
+
+/* Action buttons */
+.actions-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  padding: 8rpx 0;
+}
+
+.action-btn {
+  font-size: 26rpx;
+  padding: 12rpx 28rpx;
+  border-radius: 32rpx;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.action-btn-primary {
+  background-color: #FF6B35;
+  color: #fff;
+  border: none;
+}
+
+.action-btn-outline {
+  background-color: #fff;
+  color: #FF6B35;
+  border: 2rpx solid #FF6B35;
+}
+
+/* Input area */
+.input-area {
+  display: flex;
+  align-items: flex-end;
+  padding: 16rpx 20rpx;
+  background-color: #fff;
+  border-top: 1rpx solid #eee;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+}
+
+.chat-input {
+  flex: 1;
+  min-height: 72rpx;
+  max-height: 200rpx;
+  padding: 16rpx 24rpx;
+  background-color: #F5F5F5;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.send-btn {
+  margin-left: 16rpx;
+  padding: 0 32rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  background-color: #FF6B35;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 36rpx;
+  border: none;
+  flex-shrink: 0;
+}
+
+.send-btn[disabled] {
+  background-color: #ccc;
+}

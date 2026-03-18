@@ -1,0 +1,342 @@
+"""LLM client: DeepSeek V3 integration with mock fallback."""
+
+import json
+import logging
+from typing import Any
+
+import httpx
+
+logger = logging.getLogger(__name__)
+
+# --- System Prompts ---
+
+PARSE_INTENT_SYSTEM = """你是"周末搭子"的意图解析模块。用户会告诉你他们的周末出行需求。
+请从用户消息中提取以下信息，返回JSON格式：
+
+{
+  "city": "城市名（如苏州、上海、杭州）或null",
+  "people_count": 人数（整数）或null,
+  "companion_type": "独自/情侣/亲子/朋友/家人"或null,
+  "energy_level": "high/medium/low"或null,
+  "constraints": ["约束条件列表，如孕妇、轮椅、老人等"],
+  "preferences": ["偏好列表，如人少、免费、拍照、美食等"]
+}
+
+注意：
+- 用户可能一句话包含多个信息，如"苏州，和老公，我是孕妇"
+- "老公/老婆"→情侣，"孩子/娃/宝宝"→亲子，"朋友/闺蜜/哥们"→朋友
+- "孕妇"是constraint不是companion_type
+- 没提到的字段设为null或空列表
+- 只返回JSON，不要其他文字"""
+
+GENERATE_PLANS_SYSTEM = """你是"周末搭子"，像一个靠谱的本地朋友帮人规划周末出行。
+根据用户需求、天气和POI数据，生成2个差异化方案（一动一静 或 一远一近）。
+
+每个方案必须包含以下字段：
+{
+  "plan_id": "生成唯一ID",
+  "title": "方案标题（简短有趣）",
+  "emoji": "一个代表方案的emoji",
+  "description": "一句话描述",
+  "duration": "预计时长",
+  "cost_range": "预估花费",
+  "transport": "交通方式",
+  "tags": ["标签列表"],
+  "stops_count": 站点数量,
+  "source_count": 数据来源数,
+  "stops": [
+    {
+      "name": "地点名",
+      "arrive_at": "到达时间",
+      "stay_duration": "停留时长",
+      "recommendation": "推荐理由/玩法",
+      "walk_to_next": "到下一站的步行距离和时间"
+    }
+  ],
+  "tips": ["贴心提示列表"],
+  "sources": [{"title": "来源标题", "likes": 点赞数, "url": "链接"}]
+}
+
+要求：
+- 方案A偏活力/户外，方案B偏安静/休闲
+- 考虑天气因素（下雨→室内方案）
+- 考虑用户约束（孕妇→避免爬山、长距离步行）
+- 每个方案3-5个站点，路线合理（步行可达或短途交通）
+- 返回JSON数组 [方案A, 方案B]
+- 如果有被拒绝的方案，避免类似推荐"""
+
+EXTRACT_POIS_SYSTEM = """从小红书笔记中提取结构化的POI（兴趣点）数据。
+对每个笔记，提取其中提到的地点信息，返回JSON数组：
+[{
+  "name": "地点名称",
+  "address": "地址（如有）",
+  "tags": ["标签"],
+  "description": "简短描述",
+  "cost_range": "花费范围",
+  "suitable_for": ["适合人群"]
+}]
+只返回JSON。"""
+
+
+class LLMService:
+    """DeepSeek V3 LLM client with mock fallback."""
+
+    def __init__(
+        self,
+        api_key: str = "",
+        base_url: str = "https://api.deepseek.com",
+        model: str = "deepseek-chat",
+    ) -> None:
+        self.api_key = api_key
+        self.base_url = base_url.rstrip("/")
+        self.model = model
+        self._client: httpx.AsyncClient | None = None
+
+    async def _get_client(self) -> httpx.AsyncClient:
+        if self._client is None:
+            self._client = httpx.AsyncClient(
+                base_url=self.base_url,
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json",
+                },
+                timeout=httpx.Timeout(15.0, connect=5.0),
+            )
+        return self._client
+
+    async def _chat_completion(
+        self,
+        system_prompt: str,
+        user_message: str,
+        max_tokens: int = 1000,
+        retries: int = 2,
+    ) -> str:
+        """Call DeepSeek API with retry. Returns raw content string."""
+        if not self.api_key:
+            raise ValueError("No API key configured")
+
+        client = await self._get_client()
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message},
+            ],
+            "max_tokens": max_tokens,
+            "temperature": 0.7,
+            "response_format": {"type": "json_object"},
+        }
+
+        last_err: Exception | None = None
+        for attempt in range(retries + 1):
+            try:
+                resp = await client.post("/v1/chat/completions", json=payload)
+                resp.raise_for_status()
+                data = resp.json()
+                return data["choices"][0]["message"]["content"]
+            except Exception as e:
+                last_err = e
+                logger.warning("LLM API attempt %d failed: %s", attempt + 1, e)
+                if attempt < retries:
+                    import asyncio
+                    await asyncio.sleep(1 * (attempt + 1))
+
+        raise last_err  # type: ignore[misc]
+
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
+
+    async def parse_intent(
+        self, user_message: str, conversation_history: list[dict[str, str]] | None = None
+    ) -> dict[str, Any]:
+        """Extract user context from message."""
+        if not self.api_key:
+            return self._mock_parse_intent(user_message)
+
+        history_text = ""
+        if conversation_history:
+            history_text = "\n之前的对话：\n" + "\n".join(
+                f"{m['role']}: {m['content']}" for m in conversation_history[-6:]
+            )
+
+        prompt = f"{history_text}\n用户最新消息：{user_message}"
+        try:
+            raw = await self._chat_completion(PARSE_INTENT_SYSTEM, prompt, max_tokens=500)
+            return json.loads(raw)
+        except Exception as e:
+            logger.error("parse_intent failed, falling back to mock: %s", e)
+            return self._mock_parse_intent(user_message)
+
+    async def generate_plans(
+        self,
+        context: dict[str, Any],
+        weather: dict[str, Any],
+        pois: list[dict[str, Any]],
+        rejected_plans: list[str] | None = None,
+    ) -> list[dict[str, Any]]:
+        """Generate 2 differentiated plans."""
+        if not self.api_key:
+            return self._mock_generate_plans(context)
+
+        prompt_parts = [
+            f"用户需求：{json.dumps(context, ensure_ascii=False)}",
+            f"天气：{json.dumps(weather, ensure_ascii=False)}",
+        ]
+        if pois:
+            prompt_parts.append(f"可用POI（前10个）：{json.dumps(pois[:10], ensure_ascii=False)}")
+        if rejected_plans:
+            prompt_parts.append(f"已拒绝的方案标题（请避免类似推荐）：{rejected_plans}")
+
+        try:
+            raw = await self._chat_completion(
+                GENERATE_PLANS_SYSTEM, "\n".join(prompt_parts), max_tokens=2000
+            )
+            result = json.loads(raw)
+            # Handle both {"plans": [...]} and [...] formats
+            if isinstance(result, dict) and "plans" in result:
+                return result["plans"]
+            if isinstance(result, list):
+                return result
+            return [result]
+        except Exception as e:
+            logger.error("generate_plans failed, falling back to mock: %s", e)
+            return self._mock_generate_plans(context)
+
+    async def extract_pois(self, notes: list[dict[str, Any]], city: str) -> list[dict[str, Any]]:
+        """Extract structured POI data from crawled notes."""
+        if not self.api_key:
+            return []
+
+        notes_text = json.dumps(
+            [{"title": n.get("title", ""), "content": n.get("content", "")[:200]} for n in notes[:5]],
+            ensure_ascii=False,
+        )
+        try:
+            raw = await self._chat_completion(
+                EXTRACT_POIS_SYSTEM,
+                f"城市：{city}\n笔记数据：{notes_text}",
+                max_tokens=1500,
+            )
+            result = json.loads(raw)
+            if isinstance(result, dict) and "pois" in result:
+                return result["pois"]
+            if isinstance(result, list):
+                return result
+            return []
+        except Exception as e:
+            logger.error("extract_pois failed: %s", e)
+            return []
+
+    async def close(self) -> None:
+        if self._client:
+            await self._client.aclose()
+            self._client = None
+
+    # ------------------------------------------------------------------
+    # Mock fallbacks
+    # ------------------------------------------------------------------
+
+    def _mock_parse_intent(self, message: str) -> dict[str, Any]:
+        """Keyword-based intent parsing fallback."""
+        result: dict[str, Any] = {
+            "city": None,
+            "people_count": None,
+            "companion_type": None,
+            "energy_level": None,
+            "constraints": [],
+            "preferences": [],
+        }
+
+        cities = ["苏州", "上海", "杭州", "南京", "北京", "广州", "深圳", "成都"]
+        for city in cities:
+            if city in message:
+                result["city"] = city
+                break
+
+        if "老公" in message or "老婆" in message or "情侣" in message:
+            result["companion_type"] = "情侣"
+        elif "孩子" in message or "亲子" in message or "娃" in message:
+            result["companion_type"] = "亲子"
+        elif "朋友" in message or "闺蜜" in message:
+            result["companion_type"] = "朋友"
+
+        if "孕妇" in message:
+            result["constraints"].append("孕妇")
+        if "轮椅" in message:
+            result["constraints"].append("轮椅")
+        if "人少" in message:
+            result["preferences"].append("人少")
+        if "免费" in message:
+            result["preferences"].append("免费")
+
+        return result
+
+    def _mock_generate_plans(self, context: dict[str, Any]) -> list[dict[str, Any]]:
+        """Return mock plans."""
+        import uuid
+
+        city = context.get("city", "苏州")
+        constraints = context.get("constraints", [])
+        tags_a = ["免费", "有餐饮"]
+        tags_b = ["室内为主", "文艺", "免费"]
+        if "孕妇" in constraints:
+            tags_a.insert(0, "孕妇友好")
+            tags_b.append("孕妇友好")
+
+        plan_a = {
+            "plan_id": f"plan-{uuid.uuid4().hex[:8]}",
+            "title": "双塔市集赏花散步",
+            "emoji": "🌸",
+            "description": "玉兰花季，吃喝逛一条线",
+            "duration": "半天（3-4小时）",
+            "cost_range": "50元以内",
+            "transport": "地铁+步行",
+            "tags": tags_a,
+            "stops_count": 4,
+            "source_count": 3,
+            "source_type": "xiaohongshu",
+            "stops": [
+                {"name": "双塔市集", "arrive_at": "10:00", "stay_duration": "30-45分钟",
+                 "recommendation": "老客满蛋饼 + 冰豆浆", "walk_to_next": "240m, 约3分钟"},
+                {"name": "定慧寺巷", "arrive_at": "10:45", "stay_duration": "20分钟",
+                 "recommendation": "玉兰花拍照打卡", "walk_to_next": "500m, 约6分钟"},
+                {"name": "耦园", "arrive_at": "11:15", "stay_duration": "45-60分钟",
+                 "recommendation": "世界文化遗产，人少清净", "walk_to_next": "300m, 约4分钟"},
+                {"name": "相门城墙", "arrive_at": "12:15", "stay_duration": "30分钟",
+                 "recommendation": "城墙上散步看护城河", "walk_to_next": ""},
+            ],
+            "tips": ["明天 7-15°C 多云，建议穿薄外套", "全程步行约 1.6km，平路为主，孕妇友好"],
+            "sources": [
+                {"title": "苏州赏花路线合集", "likes": 2340, "url": "https://example.com/1"},
+                {"title": "双塔市集必吃攻略", "likes": 1820, "url": "https://example.com/2"},
+            ],
+        }
+
+        plan_b = {
+            "plan_id": f"plan-{uuid.uuid4().hex[:8]}",
+            "title": f"{city}博物馆文艺之旅",
+            "emoji": "🏛️",
+            "description": "看展逛馆，咖啡收尾",
+            "duration": "半天（3-4小时）",
+            "cost_range": "30元以内",
+            "transport": "地铁+步行",
+            "tags": tags_b,
+            "stops_count": 3,
+            "source_count": 2,
+            "source_type": "ai_generated",
+            "stops": [
+                {"name": "苏州博物馆", "arrive_at": "09:30", "stay_duration": "1.5-2小时",
+                 "recommendation": "贝聿铭设计，免费预约", "walk_to_next": "800m, 约10分钟"},
+                {"name": "平江路", "arrive_at": "11:30", "stay_duration": "1小时",
+                 "recommendation": "逛小店 + 午餐", "walk_to_next": "200m, 约2分钟"},
+                {"name": "猫的天空之城", "arrive_at": "12:30", "stay_duration": "30-45分钟",
+                 "recommendation": "写明信片 + 咖啡", "walk_to_next": ""},
+            ],
+            "tips": ["苏州博物馆需提前预约，免费", "平江路人流较大，建议避开下午高峰"],
+            "sources": [
+                {"title": "苏州博物馆攻略", "likes": 3100, "url": "https://example.com/4"},
+            ],
+        }
+
+        return [plan_a, plan_b]

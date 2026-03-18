@@ -1,0 +1,23 @@
+/* pages/profile/profile.wxss */
+.profile-container {
+  padding: 30rpx;
+}
+
+.profile-header {
+  margin-bottom: 40rpx;
+}
+
+.profile-title {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  color: #999;
+  font-size: 28rpx;
+  text-align: center;
+}
