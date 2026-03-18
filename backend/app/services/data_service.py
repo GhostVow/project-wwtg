@@ -86,7 +86,7 @@ class DataService:
         )
 
         try:
-            raw = await self._llm._chat_completion(
+            raw = await self._llm.chat_completion(
                 "你是一个旅游推荐助手，熟悉中国各城市的热门和小众景点。",
                 prompt,
                 max_tokens=1500,

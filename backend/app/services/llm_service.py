@@ -104,7 +104,7 @@ class LLMService:
             )
         return self._client
 
-    async def _chat_completion(
+    async def chat_completion(
         self,
         system_prompt: str,
         user_message: str,
@@ -162,7 +162,7 @@ class LLMService:
 
         prompt = f"{history_text}\n用户最新消息：{user_message}"
         try:
-            raw = await self._chat_completion(PARSE_INTENT_SYSTEM, prompt, max_tokens=500)
+            raw = await self.chat_completion(PARSE_INTENT_SYSTEM, prompt, max_tokens=500)
             return json.loads(raw)
         except Exception as e:
             logger.error("parse_intent failed, falling back to mock: %s", e)
@@ -189,7 +189,7 @@ class LLMService:
             prompt_parts.append(f"已拒绝的方案标题（请避免类似推荐）：{rejected_plans}")
 
         try:
-            raw = await self._chat_completion(
+            raw = await self.chat_completion(
                 GENERATE_PLANS_SYSTEM, "\n".join(prompt_parts), max_tokens=2000
             )
             result = json.loads(raw)
@@ -213,7 +213,7 @@ class LLMService:
             ensure_ascii=False,
         )
         try:
-            raw = await self._chat_completion(
+            raw = await self.chat_completion(
                 EXTRACT_POIS_SYSTEM,
                 f"城市：{city}\n笔记数据：{notes_text}",
                 max_tokens=1500,
