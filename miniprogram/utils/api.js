@@ -117,4 +117,31 @@ function trackEvent(event, properties = {}) {
   });
 }
 
-module.exports = { request, sendChatMessage, getPlanDetail, trackEvent };
+/**
+ * 选择方案
+ */
+function selectPlan(planId, sessionId) {
+  return request('/plan/select', {
+    method: 'POST',
+    data: { plan_id: planId, session_id: sessionId },
+  });
+}
+
+/**
+ * 拒绝方案
+ */
+function rejectPlan(planId, sessionId) {
+  return request('/plan/reject', {
+    method: 'POST',
+    data: { plan_id: planId, session_id: sessionId },
+  });
+}
+
+/**
+ * 获取聊天历史
+ */
+function getHistory(sessionId) {
+  return request('/chat/history/' + sessionId);
+}
+
+module.exports = { request, sendChatMessage, getPlanDetail, trackEvent, selectPlan, rejectPlan, getHistory };

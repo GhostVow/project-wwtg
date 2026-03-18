@@ -100,12 +100,24 @@ Page({
     }
   },
 
-  onActionTap(e) {
+  async onActionTap(e) {
     const action = e.currentTarget.dataset.action;
     if (action === 'select_a' || action === 'select_b') {
       const label = action === 'select_a' ? '就选A' : '就选B';
       this.addMessage('user', label);
-      // TODO: call plan/select API
+
+      // Find the selected plan from messages
+      const planMessages = this.data.messages.filter(m => m.role === 'plan_card');
+      const planIndex = action === 'select_a' ? 0 : 1;
+      const plan = planMessages.length > planIndex ? planMessages[planMessages.length - (2 - planIndex)] : null;
+      const planId = plan ? plan.content.plan_id : null;
+      const sessionId = this.data.sessionId;
+
+      if (planId && sessionId) {
+        api.selectPlan(planId, sessionId).catch(err => console.error('selectPlan failed:', err));
+        api.trackEvent('plan_selected', { plan_id: planId });
+      }
+
       this.addMessage('assistant', '好的，方案已选择！祝你周末愉快 🎉');
     } else if (action === 'reject') {
       this.addMessage('user', '都不喜欢，换一批');
