@@ -8,16 +8,25 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.router import api_router
 from app.config import settings
+from sqlalchemy import text
+
+from app.core.deps import close_redis, engine, get_redis_client
 from app.middleware import ErrorHandlingMiddleware, RequestLoggingMiddleware
+from app.models.db import Base
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Application lifespan: startup and shutdown hooks."""
-    # Startup: initialize connections (mocked in W1)
     print(f"🚀 Starting {settings.app_name}")
+    # Create all tables (idempotent — safe to call every startup)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    print("✅ Database tables ensured")
     yield
     # Shutdown: cleanup
+    await close_redis()
+    await engine.dispose()
     print(f"👋 Shutting down {settings.app_name}")
 
 
@@ -45,6 +54,24 @@ app.include_router(api_router, prefix="/api/v1")
 
 
 @app.get("/health")
-async def health() -> dict[str, str]:
-    """Health check endpoint."""
-    return {"status": "ok"}
+async def health() -> dict:
+    """Health check endpoint — verifies DB and Redis connectivity."""
+    status: dict = {"status": "ok", "db": "ok", "redis": "ok"}
+
+    # Check DB
+    try:
+        async with engine.connect() as conn:
+            await conn.execute(text("SELECT 1"))
+    except Exception as exc:
+        status["db"] = f"error: {exc}"
+        status["status"] = "degraded"
+
+    # Check Redis
+    try:
+        redis = get_redis_client()
+        await redis.ping()
+    except Exception as exc:
+        status["redis"] = f"error: {exc}"
+        status["status"] = "degraded"
+
+    return status
