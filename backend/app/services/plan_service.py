@@ -41,12 +41,24 @@ class PlanService:
         if self.llm is None:
             return self.generate_mock_plans(UserContext(**{k: v for k, v in context.items() if v is not None and k in UserContext.model_fields}))
 
+        # Determine if using AI-generated data (no real crawler sources)
+        all_ai_generated = not pois or all(
+            p.get("source_type") == "ai_generated" for p in pois
+        )
+
         raw_plans = await self.llm.generate_plans(context, weather, pois, rejected_plans)
 
         cards: list[PlanCard] = []
         for plan_data in raw_plans[:2]:
             plan_id = plan_data.get("plan_id") or f"plan-{uuid.uuid4().hex[:8]}"
             plan_data["plan_id"] = plan_id
+
+            # If all POIs are AI-generated, mark plans accordingly
+            if all_ai_generated:
+                plan_data["source_type"] = "ai_generated"
+                # Remove xiaohongshu source references
+                plan_data.pop("sources", None)
+                plan_data["sources"] = []
 
             # Store full plan for detail retrieval
             self._plans[plan_id] = plan_data

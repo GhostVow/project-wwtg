@@ -59,8 +59,65 @@ class DataService:
     # ------------------------------------------------------------------
 
     async def get_pois(self, city: str, tags: list[str]) -> list[dict[str, Any]]:
-        """Fetch POIs for a city/tag combo from cache or crawler."""
-        return await self.get_cached_pois(city, tags)
+        """Fetch POIs for a city/tag combo from cache, crawler, or LLM fallback."""
+        pois = await self.get_cached_pois(city, tags)
+        if not pois:
+            logger.info("No cached POIs for %s, trying LLM fallback", city)
+            pois = await self.generate_fallback_pois(city, tags)
+        return pois
+
+    async def generate_fallback_pois(self, city: str, tags: list[str] | None = None) -> list[dict[str, Any]]:
+        """Generate POIs using LLM general knowledge when no crawler data available.
+
+        Returns POIs marked with source_type='ai_generated'.
+        """
+        if self._llm is None or not getattr(self._llm, "api_key", None):
+            logger.warning("No LLM available for fallback POI generation")
+            return []
+
+        prompt = (
+            f"为城市「{city}」推荐8-10个适合周末出游的地点（POI）。"
+        )
+        if tags:
+            prompt += f"用户偏好：{', '.join(tags)}。"
+        prompt += (
+            "返回JSON数组，每个元素包含：name, address, tags(数组), description, "
+            "cost_range, suitable_for(数组)。只返回JSON，不要其他文字。"
+        )
+
+        try:
+            raw = await self._llm._chat_completion(
+                "你是一个旅游推荐助手，熟悉中国各城市的热门和小众景点。",
+                prompt,
+                max_tokens=1500,
+            )
+            import json as _json
+            result = _json.loads(raw)
+            if isinstance(result, dict) and "pois" in result:
+                result = result["pois"]
+            if not isinstance(result, list):
+                result = [result]
+
+            pois: list[dict[str, Any]] = []
+            for item in result:
+                poi = {
+                    "name": item.get("name", "未知地点"),
+                    "address": item.get("address"),
+                    "city": city,
+                    "tags": item.get("tags", []),
+                    "description": item.get("description"),
+                    "cost_range": item.get("cost_range"),
+                    "suitable_for": item.get("suitable_for", []),
+                    "source_type": "ai_generated",
+                    "source_url": None,
+                    "source_likes": None,
+                }
+                pois.append(poi)
+            logger.info("LLM fallback generated %d POIs for %s", len(pois), city)
+            return pois
+        except Exception:
+            logger.exception("LLM fallback POI generation failed for %s", city)
+            return []
 
     async def refresh_cache(self, city: str) -> int:
         """Trigger a cache refresh for a city. Returns number of POIs updated."""
