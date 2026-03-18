@@ -6,8 +6,12 @@ All external dependencies (Redis, PostgreSQL, crawler) are injected for testabil
 
 import json
 import logging
+from datetime import datetime, timedelta, timezone
 from typing import Any, Optional
 
+from sqlalchemy import select
+
+from app.models.db import PoiCache
 from app.models.schemas import CrawlResult, POIData
 from app.services.crawler.config import (
     BATCH_COOLDOWN,
@@ -16,12 +20,16 @@ from app.services.crawler.config import (
 )
 from app.services.crawler.stealth import random_delay
 from app.services.crawler.xhs_crawler import XHSCrawler
+from app.services.llm_service import LLMService
 
 logger = logging.getLogger(__name__)
 
 # Redis key patterns
 _CACHE_KEY = "wwtg:pois:{city}"
 _CACHE_TTL = 48 * 3600  # 48 hours
+
+# LLM extraction batch size
+_LLM_BATCH_SIZE = 5
 
 
 class DataService:
@@ -31,6 +39,7 @@ class DataService:
         crawler: XHSCrawler instance (or None to skip crawling).
         redis_client: Async Redis client (or None for no-cache mode).
         db_session: Async SQLAlchemy session (or None for no-persist mode).
+        llm_service: LLMService instance (or None for mock extraction).
     """
 
     def __init__(
@@ -38,10 +47,12 @@ class DataService:
         crawler: Optional[XHSCrawler] = None,
         redis_client: Any = None,
         db_session: Any = None,
+        llm_service: Optional[LLMService] = None,
     ) -> None:
         self._crawler = crawler
         self._redis = redis_client
         self._db = db_session
+        self._llm = llm_service
 
     # ------------------------------------------------------------------
     # Public API (preserved from W1 for backward compat)
@@ -129,8 +140,7 @@ class DataService:
     async def process_notes(self, notes: list[CrawlResult], city: str) -> list[POIData]:
         """Extract POI data from crawled notes using LLM.
 
-        Currently returns a mock/heuristic extraction.
-        Will integrate real LLM in a future milestone.
+        Uses LLM extraction when available, falls back to mock/heuristic.
 
         Args:
             notes: List of crawled note results.
@@ -139,10 +149,59 @@ class DataService:
         Returns:
             List of extracted POIData.
         """
-        pois: list[POIData] = []
+        if self._llm and self._llm.api_key:
+            return await self._extract_pois_with_llm(notes, city)
+        return self._extract_pois_mock(notes, city)
 
+    async def _extract_pois_with_llm(
+        self, notes: list[CrawlResult], city: str
+    ) -> list[POIData]:
+        """Extract POIs via LLM in batches, with mock fallback per batch."""
+        all_pois: list[POIData] = []
+
+        for i in range(0, len(notes), _LLM_BATCH_SIZE):
+            batch = notes[i : i + _LLM_BATCH_SIZE]
+            try:
+                notes_dicts = [
+                    {
+                        "title": n.title,
+                        "content": n.content[:300] if n.content else "",
+                        "tags": n.tags,
+                        "url": n.url,
+                        "likes": n.likes,
+                    }
+                    for n in batch
+                ]
+                extracted = await self._llm.extract_pois(notes_dicts, city)  # type: ignore[union-attr]
+                for j, poi_dict in enumerate(extracted):
+                    # Map back source metadata from original note
+                    source_note = batch[min(j, len(batch) - 1)]
+                    poi = POIData(
+                        name=poi_dict.get("name", "未知地点"),
+                        address=poi_dict.get("address"),
+                        city=city,
+                        tags=poi_dict.get("tags", []),
+                        description=poi_dict.get("description"),
+                        cost_range=poi_dict.get("cost_range"),
+                        suitable_for=poi_dict.get("suitable_for", []),
+                        source_type="xiaohongshu",
+                        source_url=source_note.url,
+                        source_likes=source_note.likes,
+                        route_suggestions=poi_dict.get("route_suggestions", []),
+                    )
+                    all_pois.append(poi)
+                logger.info("LLM extracted %d POIs from batch %d", len(extracted), i // _LLM_BATCH_SIZE + 1)
+            except Exception:
+                logger.exception("LLM extraction failed for batch %d, using mock", i // _LLM_BATCH_SIZE + 1)
+                all_pois.extend(self._extract_pois_mock(batch, city))
+
+        return all_pois
+
+    @staticmethod
+    def _extract_pois_mock(notes: list[CrawlResult], city: str) -> list[POIData]:
+        """Fallback: create POIs from note metadata without LLM."""
+        pois: list[POIData] = []
         for note in notes:
-            # Mock LLM extraction: create a POI from the note metadata
             poi = POIData(
                 name=note.title[:50] if note.title else "未知地点",
                 city=city,
@@ -153,7 +212,6 @@ class DataService:
                 source_likes=note.likes,
             )
             pois.append(poi)
-
         return pois
 
     # ------------------------------------------------------------------
@@ -161,7 +219,7 @@ class DataService:
     # ------------------------------------------------------------------
 
     async def cache_pois(self, city: str, pois: list[POIData]) -> None:
-        """Write POIs to Redis (48h TTL) and optionally PostgreSQL.
+        """Write POIs to Redis (48h TTL) and PostgreSQL (upsert).
 
         Args:
             city: City key.
@@ -181,12 +239,86 @@ class DataService:
             except Exception:
                 logger.warning("Failed to cache POIs in Redis for %s", city)
 
-        # PostgreSQL persistence (placeholder — needs DB models)
+        # PostgreSQL upsert
         if self._db is not None:
-            logger.debug("PostgreSQL persistence not yet implemented")
+            try:
+                await self._upsert_pois_to_db(city, pois)
+                logger.debug("Persisted %d POIs for %s in PostgreSQL", len(pois), city)
+            except Exception:
+                logger.exception("Failed to persist POIs in PostgreSQL for %s", city)
+
+    async def _upsert_pois_to_db(self, city: str, pois: list[POIData]) -> None:
+        """Upsert POIs into poi_cache table. Match by source_url or name+city."""
+        expires = datetime.now(timezone.utc) + timedelta(seconds=_CACHE_TTL)
+
+        for poi in pois:
+            # Try to find existing record
+            stmt = select(PoiCache)
+            if poi.source_url:
+                stmt = stmt.where(PoiCache.source_url == poi.source_url)
+            else:
+                stmt = stmt.where(PoiCache.city == city, PoiCache.poi_data["name"].astext == poi.name)
+
+            result = await self._db.execute(stmt)
+            existing = result.scalars().first()
+
+            poi_json = poi.model_dump()
+            if existing:
+                existing.poi_data = poi_json
+                existing.tags = poi.tags
+                existing.source_likes = poi.source_likes
+                existing.fetched_at = datetime.now(timezone.utc)
+                existing.expires_at = expires
+            else:
+                record = PoiCache(
+                    city=city,
+                    tags=poi.tags,
+                    poi_data=poi_json,
+                    source_url=poi.source_url,
+                    source_likes=poi.source_likes,
+                    expires_at=expires,
+                )
+                self._db.add(record)
+
+        await self._db.commit()
+
+    async def get_pois_from_db(
+        self, city: str, tags: list[str] | None = None
+    ) -> list[dict[str, Any]]:
+        """Fetch POIs from PostgreSQL as fallback when Redis misses.
+
+        Args:
+            city: City to query.
+            tags: Optional tag filter.
+
+        Returns:
+            List of POI dicts.
+        """
+        if self._db is None:
+            return []
+
+        try:
+            now = datetime.now(timezone.utc)
+            stmt = select(PoiCache).where(
+                PoiCache.city == city,
+                PoiCache.expires_at > now,
+            )
+            result = await self._db.execute(stmt)
+            rows = result.scalars().all()
+
+            pois = [row.poi_data for row in rows]
+            if tags:
+                tag_set = set(tags)
+                pois = [p for p in pois if tag_set & set(p.get("tags", []))]
+
+            logger.info("DB fallback: %d POIs for %s", len(pois), city)
+            return pois
+        except Exception:
+            logger.exception("Failed to read POIs from DB for %s", city)
+            return []
 
     async def get_cached_pois(self, city: str, tags: list[str] | None = None) -> list[dict[str, Any]]:
-        """Read POIs from Redis cache, optionally filtered by tags.
+        """Read POIs from Redis cache, falling back to DB, optionally filtered by tags.
 
         Args:
             city: City to query.
@@ -195,26 +327,20 @@ class DataService:
         Returns:
             List of POI dicts. Empty list on cache miss.
         """
-        if self._redis is None:
-            logger.debug("Cache SKIP for %s (no Redis client configured)", city)
-            return []
-
-        key = _CACHE_KEY.format(city=city)
-        try:
-            raw = await self._redis.get(key)
-            if not raw:
+        if self._redis is not None:
+            key = _CACHE_KEY.format(city=city)
+            try:
+                raw = await self._redis.get(key)
+                if raw:
+                    logger.info("Cache HIT for %s", city)
+                    pois: list[dict[str, Any]] = json.loads(raw)
+                    if tags:
+                        tag_set = set(tags)
+                        pois = [p for p in pois if tag_set & set(p.get("tags", []))]
+                    return pois
                 logger.info("Cache MISS for %s", city)
-                return []
+            except Exception:
+                logger.warning("Failed to read cached POIs for %s", city)
 
-            logger.info("Cache HIT for %s", city)
-            pois: list[dict[str, Any]] = json.loads(raw)
-
-            # Filter by tags if requested
-            if tags:
-                tag_set = set(tags)
-                pois = [p for p in pois if tag_set & set(p.get("tags", []))]
-
-            return pois
-        except Exception:
-            logger.warning("Failed to read cached POIs for %s", city)
-            return []
+        # Fallback to DB
+        return await self.get_pois_from_db(city, tags)
