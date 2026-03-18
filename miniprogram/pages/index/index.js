@@ -121,6 +121,19 @@ Page({
       this.addMessage('assistant', '好的，方案已选择！祝你周末愉快 🎉');
     } else if (action === 'reject') {
       this.addMessage('user', '都不喜欢，换一批');
+
+      // Find the most recent plan cards and reject them via API
+      const planMessages = this.data.messages.filter(m => m.role === 'plan_card');
+      const sessionId = this.data.sessionId;
+      if (planMessages.length > 0 && sessionId) {
+        const latestPlan = planMessages[planMessages.length - 1];
+        const planId = latestPlan.content.plan_id;
+        if (planId) {
+          api.rejectPlan(planId, sessionId).catch(err => console.error('rejectPlan failed:', err));
+          api.trackEvent('plan_rejected', { plan_id: planId });
+        }
+      }
+
       this.sendMessage('都不喜欢，换一批');
     }
   },
