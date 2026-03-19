@@ -2,8 +2,10 @@
 
 Usage:
     python -m app.pipeline.daily_runner
+    python -m app.pipeline.daily_runner --city 上海 --limit 2
 """
 
+import argparse
 import asyncio
 import logging
 import sys
@@ -16,8 +18,17 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="WWTG daily data pipeline")
+    parser.add_argument("--city", type=str, help="Single city to crawl (default: all)")
+    parser.add_argument("--limit", type=int, help="Max keywords per city (default: all)")
+    return parser.parse_args()
+
+
 async def main() -> None:
     """Run the daily data pipeline."""
+    args = parse_args()
+
     from app.config import settings
     from app.services.crawler.cookie_manager import CookieManager
     from app.services.crawler.xhs_crawler import XHSCrawler
@@ -83,7 +94,10 @@ async def main() -> None:
         crawler = XHSCrawler(browser=browser, cookie_manager=cookie_manager)
         service = DataService(crawler=crawler, redis_client=redis_client)
 
-        results = await service.run_daily_pipeline()
+        results = await service.run_daily_pipeline(
+            cities=[args.city] if args.city else None,
+            keyword_limit=args.limit,
+        )
 
         logger.info("=== Pipeline Complete ===")
         for city, count in results.items():

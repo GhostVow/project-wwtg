@@ -148,24 +148,33 @@ class DataService:
     # Pipeline
     # ------------------------------------------------------------------
 
-    async def run_daily_pipeline(self) -> dict[str, int]:
+    async def run_daily_pipeline(
+        self,
+        cities: list[str] | None = None,
+        keyword_limit: int | None = None,
+    ) -> dict[str, int]:
         """Orchestrate the daily crawl for all cities and keywords.
+
+        Args:
+            cities: Optional list of cities to crawl (default: all from config).
+            keyword_limit: Optional max keywords per city (default: all).
 
         Returns:
             Dict mapping city name to number of POIs collected.
         """
+        target_cities = cities or CITIES
         results: dict[str, int] = {}
 
-        for city in CITIES:
+        for city in target_cities:
             logger.info("Starting pipeline for city: %s", city)
-            pois = await self._crawl_city(city)
+            pois = await self._crawl_city(city, keyword_limit=keyword_limit)
             await self.cache_pois(city, pois)
             results[city] = len(pois)
             logger.info("City %s: %d POIs cached", city, len(pois))
 
         return results
 
-    async def _crawl_city(self, city: str) -> list[POIData]:
+    async def _crawl_city(self, city: str, keyword_limit: int | None = None) -> list[POIData]:
         """Crawl all keywords for a single city and process into POIs."""
         all_pois: list[POIData] = []
 
@@ -173,8 +182,10 @@ class DataService:
             logger.warning("No crawler configured, skipping crawl for %s", city)
             return all_pois
 
-        for i, keyword in enumerate(SEARCH_KEYWORDS):
-            logger.info("  Crawling keyword %d/%d: %s %s", i + 1, len(SEARCH_KEYWORDS), city, keyword)
+        keywords = SEARCH_KEYWORDS[:keyword_limit] if keyword_limit else SEARCH_KEYWORDS
+
+        for i, keyword in enumerate(keywords):
+            logger.info("  Crawling keyword %d/%d: %s %s", i + 1, len(keywords), city, keyword)
             try:
                 raw_notes = await self._crawler.search_notes(keyword=keyword, city=city, limit=20)
                 notes = [CrawlResult(**n) for n in raw_notes]
@@ -184,7 +195,7 @@ class DataService:
                 logger.exception("Error crawling %s %s", city, keyword)
 
             # Batch cooldown between keyword groups
-            if i < len(SEARCH_KEYWORDS) - 1:
+            if i < len(keywords) - 1:
                 logger.debug("  Batch cooldown %ds", BATCH_COOLDOWN)
                 await random_delay(BATCH_COOLDOWN, BATCH_COOLDOWN + 5)
 
