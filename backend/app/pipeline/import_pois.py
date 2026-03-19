@@ -41,25 +41,34 @@ async def main() -> None:
 
     raw = json.loads(filepath.read_text(encoding="utf-8"))
 
-    # Support both flat list and {city: [...]} grouped format
+    # Normalize input format
     if isinstance(raw, dict):
-        grouped: dict[str, list] = raw
+        if "results" in raw:
+            # XHS search result format: {"count": N, "results": [...]}
+            items_list = raw["results"]
+            grouped = {args.city or "unknown": items_list}
+        else:
+            # Grouped format: {"上海": [...], "苏州": [...]}
+            grouped = raw
     elif isinstance(raw, list):
-        city = args.city
-        if not city:
-            # Try to infer city from filename (e.g. pois_上海.json)
-            stem = filepath.stem
-            for c in ["上海", "苏州", "杭州", "南京", "北京"]:
-                if c in stem:
-                    city = c
-                    break
-            if not city:
-                logger.error("Cannot determine city. Use --city or name file like pois_上海.json")
-                sys.exit(1)
-        grouped = {city: raw}
+        grouped = {args.city or "unknown": raw}
     else:
-        logger.error("Invalid JSON format. Expected list or {city: [...]}")
+        logger.error("Invalid JSON format")
         sys.exit(1)
+
+    # Resolve city
+    for city_key in list(grouped.keys()):
+        if city_key == "unknown":
+            if not args.city:
+                stem = filepath.stem
+                for c in ["上海", "苏州", "杭州", "南京", "北京"]:
+                    if c in stem:
+                        args.city = c
+                        break
+                if not args.city:
+                    logger.error("Cannot determine city. Use --city or name file like pois_上海.json")
+                    sys.exit(1)
+            grouped[args.city] = grouped.pop(city_key)
 
     # Redis
     redis_client = None
@@ -87,7 +96,16 @@ async def main() -> None:
         pois = []
         for item in items:
             try:
-                # Flexible: accept POIData format or raw note format
+                # Handle XHS search result format + POIData format
+                note_id = item.get("id", item.get("note_id", ""))
+                source_url = item.get("source_url", item.get("url"))
+                if not source_url and note_id:
+                    source_url = f"https://www.xiaohongshu.com/explore/{note_id}"
+
+                likes = item.get("source_likes") or item.get("likes") or item.get("liked_count")
+                if likes is not None:
+                    likes = int(likes)
+
                 poi = POIData(
                     name=item.get("name", item.get("title", "Unknown")),
                     address=item.get("address"),
@@ -97,8 +115,8 @@ async def main() -> None:
                     cost_range=item.get("cost_range"),
                     suitable_for=item.get("suitable_for", []),
                     source_type="xiaohongshu",
-                    source_url=item.get("source_url", item.get("url")),
-                    source_likes=item.get("source_likes", item.get("likes")),
+                    source_url=source_url,
+                    source_likes=likes,
                 )
                 pois.append(poi)
             except Exception as e:
