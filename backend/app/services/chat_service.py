@@ -280,6 +280,9 @@ class ChatService:
 
         weather_data, pois_data = await asyncio.gather(weather_task, pois_task)
 
+        logger.info("generate_plans input: city=%s, pois=%d, rejected=%s",
+                     ctx.city, len(pois_data), session.get("rejected_plans"))
+
         context_dict = ctx.model_dump()
 
         plans = await self.plan_service.generate_plans(

@@ -61,8 +61,10 @@ class DataService:
     async def get_pois(self, city: str, tags: list[str]) -> list[dict[str, Any]]:
         """Fetch POIs for a city/tag combo from cache, crawler, or LLM fallback."""
         pois = await self.get_cached_pois(city, tags)
-        if not pois:
-            logger.info("No cached POIs for %s, trying LLM fallback", city)
+        if pois:
+            logger.info("Found %d cached POIs for %s (real data)", len(pois), city)
+        else:
+            logger.info("No cached POIs for %s, trying LLM fallback (ai_generated)", city)
             pois = await self.generate_fallback_pois(city, tags)
         return pois
 
