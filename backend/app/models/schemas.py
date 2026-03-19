@@ -113,6 +113,7 @@ class POIData(BaseModel):
     source_url: Optional[str] = None
     source_likes: Optional[int] = None
     route_suggestions: list[str] = Field(default_factory=list)
+    verified: Optional[bool] = None  # True if AMAP confirmed, False if not found, None if unchecked
 
 
 class CrawlResult(BaseModel):

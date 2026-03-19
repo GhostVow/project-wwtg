@@ -120,9 +120,9 @@ async def main() -> None:
         verified_count = 0
         async with httpx.AsyncClient(timeout=httpx.Timeout(10.0)) as client:
             for poi in pois:
-                name = poi.get("name", "")
+                name = poi.name if hasattr(poi, "name") else poi.get("name", "")
                 if not name:
-                    poi["verified"] = False
+                    poi.verified = False if hasattr(poi, "verified") else None
                     continue
                 try:
                     resp = await client.get(
@@ -137,24 +137,36 @@ async def main() -> None:
                     )
                     data = resp.json()
                     if data.get("status") == "1" and data.get("pois"):
-                        poi["verified"] = True
-                        amap_poi = data["pois"][0]
-                        # Enrich with real address from AMAP
-                        poi["address"] = amap_poi.get("address", poi.get("address", ""))
-                        poi["amap_name"] = amap_poi.get("name", "")
+                        if hasattr(poi, "__dict__"):
+                            poi.verified = True
+                            amap_poi = data["pois"][0]
+                            poi.address = amap_poi.get("address", poi.address or "")
+                        else:
+                            poi["verified"] = True
+                            amap_poi = data["pois"][0]
+                            poi["address"] = amap_poi.get("address", poi.get("address", ""))
                         verified_count += 1
                     else:
-                        poi["verified"] = False
+                        if hasattr(poi, "__dict__"):
+                            poi.verified = False
+                        else:
+                            poi["verified"] = False
                 except Exception as e:
                     logger.warning("AMAP verify failed for %s: %s", name, e)
-                    poi["verified"] = False
+                    if hasattr(poi, "__dict__"):
+                        poi.verified = False
+                    else:
+                        poi["verified"] = False
                 await asyncio.sleep(0.2)  # Rate limit
 
         logger.info("Verified %d/%d POIs via AMAP", verified_count, len(pois))
     elif pois:
         logger.warning("AMAP_API_KEY not set — skipping POI verification")
         for poi in pois:
-            poi["verified"] = False
+            if hasattr(poi, "__dict__"):
+                poi.verified = False
+            else:
+                poi["verified"] = False
 
     if pois:
         await service.cache_pois(args.city, pois)
