@@ -100,7 +100,7 @@ class LLMService:
                     "Authorization": f"Bearer {self.api_key}",
                     "Content-Type": "application/json",
                 },
-                timeout=httpx.Timeout(settings.LLM_TIMEOUT, connect=10.0),
+                timeout=httpx.Timeout(settings.llm_timeout, connect=10.0),
             )
         return self._client
 
