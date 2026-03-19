@@ -438,3 +438,26 @@ pages/
 ---
 
 **下一步：** 评审通过后，W1 开始动工 🚀
+
+---
+
+## Implementation Status (as of M11)
+
+| Module | Status | Notes |
+|--------|--------|-------|
+| FastAPI backend scaffold | ✅ Done | Project structure, config, routing |
+| Conversation state machine | ✅ Done | Intent extraction, multi-field parsing |
+| Data pipeline POC | ✅ Done | Playwright scraper + Redis cache |
+| Plan generation (LLM orchestrator) | ✅ Done | Parallel weather/POI fetch + dual-plan generation |
+| Weather & map API integration | ✅ Done | wttr.in + 高德 geocoding |
+| Mini program chat UI | ✅ Done | Message bubbles + plan card components |
+| Plan card rendering | ✅ Done | Sync JSON response + loading animation (no SSE) |
+| Plan detail page | ✅ Done | Route stops, tips, navigation links |
+| Reject / re-push flow | ✅ Done | Backend reject API + frontend handler (M11 fix) |
+| Analytics event tracking | ✅ Done | select, reject, card_impression events |
+| CI/CD pipeline | ✅ Done | GitHub Actions: test + lint (M11) |
+| SSE streaming | ⏸ Deferred | MVP uses sync JSON + loading animation; SSE deferred post-MVP |
+| Share card generation | ❌ Pending | P1 feature, not in MVP scope |
+| Production deployment (Azure) | ❌ Pending | Awaiting Azure resource provisioning |
+| 小红书 production scraper | ❌ Pending | POC done; production anti-ban strategy TBD |
+| Performance optimization (15s target) | ❌ Pending | W4 task |

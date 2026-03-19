@@ -6,6 +6,8 @@ from typing import Any
 
 import httpx
 
+from app.config import settings
+
 logger = logging.getLogger(__name__)
 
 # --- System Prompts ---
@@ -63,19 +65,22 @@ GENERATE_PLANS_SYSTEM = """你是"周末搭子"，像一个靠谱的本地朋友
 - 考虑用户约束（孕妇→避免爬山、长距离步行）
 - 每个方案3-5个站点，路线合理（步行可达或短途交通）
 - 返回JSON数组 [方案A, 方案B]
-- 如果有被拒绝的方案，避免类似推荐"""
+- 如果有被拒绝的方案，避免类似推荐
+- **严禁编造不存在的地点和店铺。只能使用提供的POI数据中提到的地点。如果数据不够就减少站点数量，不要凑数。**
+- sources字段必须引用提供的真实笔记数据"""
 
 EXTRACT_POIS_SYSTEM = """从小红书笔记中提取结构化的POI（兴趣点）数据。
-对每个笔记，提取其中提到的地点信息，返回JSON数组：
+笔记可能只有标题没有正文，请从标题、标签、点赞数等信息推断地点。
+对每组笔记，提取其中提到或暗示的具体地点（景点、餐厅、咖啡馆、公园等），返回JSON数组：
 [{
   "name": "地点名称",
-  "address": "地址（如有）",
+  "address": "地址（如有，没有则为null）",
   "tags": ["标签"],
-  "description": "简短描述",
-  "cost_range": "花费范围",
+  "description": "简短描述（基于笔记内容推断）",
+  "cost_range": "花费范围（如有，没有则为null）",
   "suitable_for": ["适合人群"]
 }]
-只返回JSON。"""
+如果无法提取任何具体地点，返回空数组 []。只返回JSON。"""
 
 
 class LLMService:
@@ -100,11 +105,11 @@ class LLMService:
                     "Authorization": f"Bearer {self.api_key}",
                     "Content-Type": "application/json",
                 },
-                timeout=httpx.Timeout(15.0, connect=5.0),
+                timeout=httpx.Timeout(settings.llm_timeout, connect=10.0),
             )
         return self._client
 
-    async def _chat_completion(
+    async def chat_completion(
         self,
         system_prompt: str,
         user_message: str,
@@ -130,7 +135,7 @@ class LLMService:
         last_err: Exception | None = None
         for attempt in range(retries + 1):
             try:
-                resp = await client.post("/v1/chat/completions", json=payload)
+                resp = await client.post("/chat/completions", json=payload)
                 resp.raise_for_status()
                 data = resp.json()
                 return data["choices"][0]["message"]["content"]
@@ -152,6 +157,7 @@ class LLMService:
     ) -> dict[str, Any]:
         """Extract user context from message."""
         if not self.api_key:
+            logger.warning("LLM_API_KEY not set, using mock parse_intent")
             return self._mock_parse_intent(user_message)
 
         history_text = ""
@@ -162,7 +168,7 @@ class LLMService:
 
         prompt = f"{history_text}\n用户最新消息：{user_message}"
         try:
-            raw = await self._chat_completion(PARSE_INTENT_SYSTEM, prompt, max_tokens=500)
+            raw = await self.chat_completion(PARSE_INTENT_SYSTEM, prompt, max_tokens=500)
             return json.loads(raw)
         except Exception as e:
             logger.error("parse_intent failed, falling back to mock: %s", e)
@@ -177,6 +183,7 @@ class LLMService:
     ) -> list[dict[str, Any]]:
         """Generate 2 differentiated plans."""
         if not self.api_key:
+            logger.warning("LLM_API_KEY not set, using mock generate_plans")
             return self._mock_generate_plans(context)
 
         prompt_parts = [
@@ -189,7 +196,7 @@ class LLMService:
             prompt_parts.append(f"已拒绝的方案标题（请避免类似推荐）：{rejected_plans}")
 
         try:
-            raw = await self._chat_completion(
+            raw = await self.chat_completion(
                 GENERATE_PLANS_SYSTEM, "\n".join(prompt_parts), max_tokens=2000
             )
             result = json.loads(raw)
@@ -209,11 +216,20 @@ class LLMService:
             return []
 
         notes_text = json.dumps(
-            [{"title": n.get("title", ""), "content": n.get("content", "")[:200]} for n in notes[:5]],
+            [
+                {
+                    "title": n.get("title", ""),
+                    "content": n.get("content", "")[:200] or "(无正文)",
+                    "tags": n.get("tags", []),
+                    "likes": n.get("likes", 0),
+                    "url": n.get("url", ""),
+                }
+                for n in notes[:5]
+            ],
             ensure_ascii=False,
         )
         try:
-            raw = await self._chat_completion(
+            raw = await self.chat_completion(
                 EXTRACT_POIS_SYSTEM,
                 f"城市：{city}\n笔记数据：{notes_text}",
                 max_tokens=1500,
@@ -270,6 +286,7 @@ class LLMService:
         if "免费" in message:
             result["preferences"].append("免费")
 
+        result["_source"] = "mock"
         return result
 
     def _mock_generate_plans(self, context: dict[str, Any]) -> list[dict[str, Any]]:
@@ -339,4 +356,6 @@ class LLMService:
             ],
         }
 
+        plan_a["_source"] = "mock"
+        plan_b["_source"] = "mock"
         return [plan_a, plan_b]

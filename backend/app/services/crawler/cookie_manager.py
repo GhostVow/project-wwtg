@@ -2,6 +2,7 @@
 
 import json
 import logging
+import os
 import time
 from pathlib import Path
 from typing import Any, Optional
@@ -10,8 +11,15 @@ from .config import COOKIE_TTL
 
 logger = logging.getLogger(__name__)
 
-# Default file path for cookie fallback
-DEFAULT_COOKIE_FILE = Path(__file__).parent / ".cookies.json"
+
+def _default_cookie_dir() -> Path:
+    """Return the cookie storage directory from env or default."""
+    return Path(os.environ.get("XHS_COOKIES_DIR", "/data/cookies"))
+
+
+def _default_cookie_file() -> Path:
+    """Return the default cookie file path (inside the configurable dir)."""
+    return _default_cookie_dir() / "cookies.json"
 
 
 class CookieManager:
@@ -30,10 +38,10 @@ class CookieManager:
     def __init__(
         self,
         redis_client: Any = None,
-        cookie_file: Path = DEFAULT_COOKIE_FILE,
+        cookie_file: Optional[Path] = None,
     ) -> None:
         self._redis = redis_client
-        self._cookie_file = cookie_file
+        self._cookie_file = cookie_file or _default_cookie_file()
         self._cached_cookies: Optional[list[dict[str, Any]]] = None
         self._loaded_at: Optional[float] = None
 
@@ -60,9 +68,14 @@ class CookieManager:
         if self._cookie_file.exists():
             try:
                 data = json.loads(self._cookie_file.read_text(encoding="utf-8"))
-                cookies = data.get("cookies", [])
+                # Support both {"cookies": [...]} and plain [...] formats
+                if isinstance(data, list):
+                    cookies = data
+                    self._loaded_at = time.time()
+                else:
+                    cookies = data.get("cookies", [])
+                    self._loaded_at = data.get("saved_at", time.time())
                 self._cached_cookies = cookies
-                self._loaded_at = data.get("saved_at", time.time())
                 logger.debug("Loaded %d cookies from file", len(cookies))
                 return cookies
             except Exception:
