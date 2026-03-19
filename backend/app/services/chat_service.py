@@ -141,6 +141,26 @@ class ChatService:
                     "rejection_count": session["rejection_count"],
                 })
 
+                # Parse rejection message for new preferences/constraints
+                try:
+                    parsed = await self.llm.parse_intent(message, history)
+                    if parsed.get("constraints"):
+                        for c in parsed["constraints"]:
+                            if c not in ctx.constraints:
+                                ctx.constraints.append(c)
+                    if parsed.get("preferences"):
+                        for p in parsed["preferences"]:
+                            if p not in ctx.preferences:
+                                ctx.preferences.append(p)
+                    if parsed.get("energy_level") and parsed["energy_level"] != ctx.energy_level:
+                        ctx.energy_level = parsed["energy_level"]
+                    if parsed.get("companion_type") and not ctx.companion_type:
+                        ctx.companion_type = parsed["companion_type"]
+                    logger.info("Updated context from rejection: constraints=%s, preferences=%s",
+                                ctx.constraints, ctx.preferences)
+                except Exception:
+                    logger.warning("Failed to parse rejection message for preferences")
+
                 # Edge case: 3+ rejections → suggest refining preferences
                 if session["rejection_count"] >= 3:
                     reply = ("看起来这些方案都不太合适 😅 "
