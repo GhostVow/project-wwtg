@@ -10,7 +10,7 @@ services:
       - ./backend/.env
     volumes:
       - api_logs:/app/logs
-      - ./data/cookies:/data/cookies
+      - ./data:/data
     restart: unless-stopped
     depends_on:
       redis:
