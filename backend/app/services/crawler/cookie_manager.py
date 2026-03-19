@@ -68,9 +68,14 @@ class CookieManager:
         if self._cookie_file.exists():
             try:
                 data = json.loads(self._cookie_file.read_text(encoding="utf-8"))
-                cookies = data.get("cookies", [])
+                # Support both {"cookies": [...]} and plain [...] formats
+                if isinstance(data, list):
+                    cookies = data
+                    self._loaded_at = time.time()
+                else:
+                    cookies = data.get("cookies", [])
+                    self._loaded_at = data.get("saved_at", time.time())
                 self._cached_cookies = cookies
-                self._loaded_at = data.get("saved_at", time.time())
                 logger.debug("Loaded %d cookies from file", len(cookies))
                 return cookies
             except Exception:
