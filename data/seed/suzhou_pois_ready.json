@@ -1,0 +1,2177 @@
+[
+  {
+    "name": "米堆山",
+    "address": "苏州市吴中区（太湖东山附近）",
+    "city": "苏州",
+    "tags": [
+      "徒步",
+      "亲子",
+      "轻徒步",
+      "自然山野"
+    ],
+    "description": "苏州周边低难度亲子徒步山峰，里程5km，爬升140m，适合新手和带娃体验。",
+    "cost_range": null,
+    "suitable_for": [
+      "家庭",
+      "儿童",
+      "初学者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/68031bde000000001d016b29",
+    "source_likes": 3520,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "潭山",
+    "address": "苏州市吴中区（太湖西山区域）",
+    "city": "苏州",
+    "tags": [
+      "徒步",
+      "亲子",
+      "轻徒步",
+      "自然山野"
+    ],
+    "description": "苏州西山片区低强度徒步山峰，里程6km，爬升250m，风景清幽，交通便利。",
+    "cost_range": null,
+    "suitable_for": [
+      "家庭",
+      "儿童",
+      "初学者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/698a10a700000000150325d1",
+    "source_likes": 2561,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "太湖西山岛",
+    "address": "苏州市吴中区金庭镇（西山岛）",
+    "city": "苏州",
+    "tags": [
+      "徒步",
+      "亲子",
+      "环湖",
+      "自然风光"
+    ],
+    "description": "太湖最大岛屿，提供7km平缓徒步路线，无显著爬升，可结合湖光山色与古村游览。",
+    "cost_range": null,
+    "suitable_for": [
+      "家庭",
+      "儿童",
+      "摄影爱好者",
+      "休闲游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69abe415000000001a028057",
+    "source_likes": 2377,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "三山岛",
+    "address": "苏州市吴中区东山镇太湖中（需乘船上岛）",
+    "city": "苏州",
+    "tags": [
+      "徒步",
+      "亲子",
+      "岛屿",
+      "无爬升",
+      "生态小岛"
+    ],
+    "description": "太湖中小众原生态岛屿，全程7km平坦路线，适合全年龄段轻松环岛漫步，观鸟、采茶、访古村。",
+    "cost_range": "船票+岛内接驳约¥30-50",
+    "suitable_for": [
+      "家庭",
+      "儿童",
+      "银发族",
+      "自然教育"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/690d7d730000000004003ba8",
+    "source_likes": 2317,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "狮子林",
+    "address": "苏州市姑苏区园林路23号",
+    "city": "苏州",
+    "tags": [
+      "古典园林",
+      "亲子游",
+      "腊梅展",
+      "苏式建筑"
+    ],
+    "description": "苏州四大名园之一，以奇石假山闻名，冬季有腊梅展，游览约2–3小时，无需预约，现场购票。",
+    "cost_range": "旺季¥40，淡季¥30",
+    "suitable_for": [
+      "家庭",
+      "儿童",
+      "文化爱好者",
+      "摄影爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/690dfd770000000003038d6f",
+    "source_likes": 2020,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "苏州博物馆",
+    "address": "苏州市姑苏区东北街204号",
+    "city": "苏州",
+    "tags": [
+      "博物馆",
+      "免费景点",
+      "建筑设计",
+      "文化打卡"
+    ],
+    "description": "贝聿铭设计的现代中式建筑杰作，免费开放，需提前预约，融合传统与当代美学，适合深度文化体验。",
+    "cost_range": "免费",
+    "suitable_for": [
+      "学生",
+      "文化爱好者",
+      "家庭",
+      "建筑爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/690dfd770000000003038d6f",
+    "source_likes": 2020,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "平江路",
+    "address": "苏州市姑苏区平江路",
+    "city": "苏州",
+    "tags": [
+      "历史街区",
+      "夜景",
+      "美食特产",
+      "古镇风情"
+    ],
+    "description": "保存完好的宋代水巷格局历史街区，免费开放，推荐傍晚前往赏夜景、听评弹、尝苏式小吃。",
+    "cost_range": null,
+    "suitable_for": [
+      "游客",
+      "情侣",
+      "家庭",
+      "摄影爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/690dfd770000000003038d6f",
+    "source_likes": 2020,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "观前街",
+    "address": "苏州市姑苏区观前街",
+    "city": "苏州",
+    "tags": [
+      "商业街",
+      "美食购物",
+      "城市中心",
+      "现代化"
+    ],
+    "description": "苏州核心商圈，集老字号、网红餐饮与商场于一体，适合短暂停留与伴手礼采购。",
+    "cost_range": null,
+    "suitable_for": [
+      "游客",
+      "年轻人",
+      "家庭",
+      "购物爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/690dfd770000000003038d6f",
+    "source_likes": 2020,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "树山生态村（树山小环线）",
+    "address": "苏州市虎丘区通安镇树山生态村",
+    "city": "苏州",
+    "tags": [
+      "徒步",
+      "茶园",
+      "竹海",
+      "悬崖观景台",
+      "亲子友好"
+    ],
+    "description": "苏州近郊高颜值轻徒步路线，含茶田野道、大石山观景台、‘绝望坡’等节点，全程5km约3小时，江南山水微缩精华。",
+    "cost_range": "停车费约¥5–10，部分观景点可能涉及村民区域小摊消费",
+    "suitable_for": [
+      "家庭",
+      "儿童",
+      "摄影爱好者",
+      "自然爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/690dfd770000000003038d6f",
+    "source_likes": 2020,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "囍咖啡",
+    "address": "苏州市十梓街（近三元坊地铁站）",
+    "city": "苏州",
+    "tags": [
+      "咖啡馆",
+      "苏州citywalk",
+      "网红咖啡",
+      "春日打卡"
+    ],
+    "description": "位于十梓街玉兰大道旁的热门咖啡馆，是苏州春日散步路线中的休憩站点，环境文艺，适合赏玉兰后小坐。",
+    "cost_range": "¥25-¥40",
+    "suitable_for": [
+      "年轻人",
+      "情侣",
+      "拍照爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/685c1397000000002203cc07",
+    "source_likes": 1745,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "苏州公园",
+    "address": "苏州市姑苏区五卅路1号",
+    "city": "苏州",
+    "tags": [
+      "城市公园",
+      "赏花",
+      "亲子游",
+      "免费景点",
+      "苏州春天"
+    ],
+    "description": "市中心老牌公园，春季盛放郁金香、洋水仙与高大玉兰；可垂钓小金鱼、带儿童游玩游乐园，阳光惬意。",
+    "cost_range": null,
+    "suitable_for": [
+      "家庭",
+      "老年人",
+      "本地居民",
+      "休闲游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69ad332d000000002603d9fa",
+    "source_likes": 1499,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "山塘街",
+    "address": "苏州市姑苏区山塘街",
+    "city": "苏州",
+    "tags": [
+      "历史文化街区",
+      "江南水乡",
+      "古街",
+      "夜景",
+      "打卡地"
+    ],
+    "description": "苏州标志性古街，小桥流水、红灯笼氛围浓厚，通贵桥为经典摄影点，融合历史、市井与美食。",
+    "cost_range": null,
+    "suitable_for": [
+      "游客",
+      "摄影爱好者",
+      "文化体验者",
+      "情侣"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69118c3f0000000004007631",
+    "source_likes": 1396,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "唐寅故居（桃花坞街区）",
+    "address": "苏州市姑苏区桃花坞大街228号",
+    "city": "苏州",
+    "tags": [
+      "名人故居",
+      "苏州园林",
+      "历史遗迹",
+      "文化景点"
+    ],
+    "description": "明代才子唐伯虎故居所在地，属桃花坞历史文化街区，可感受其生活痕迹与江南文人气息。",
+    "cost_range": "¥15-¥20",
+    "suitable_for": [
+      "历史文化爱好者",
+      "学生",
+      "研学游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69ad6d79000000002202eff3",
+    "source_likes": 1365,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "柴园",
+    "address": "苏州市姑苏区醋库巷44号",
+    "city": "苏州",
+    "tags": [
+      "苏州园林",
+      "小众园林",
+      "清代私家园林",
+      "静谧打卡"
+    ],
+    "description": "清代古典园林，幽静雅致，是玉兰季citywalk路线中的重要节点，白墙黛瓦与玉兰相映成趣。",
+    "cost_range": "¥10-¥15",
+    "suitable_for": [
+      "园林爱好者",
+      "静心游客",
+      "摄影人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e173bd000000001d02ccc6",
+    "source_likes": 1291,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "静思书院",
+    "address": "苏州市姑苏区十全街（近网师园）",
+    "city": "苏州",
+    "tags": [
+      "文化空间",
+      "书店",
+      "茶饮",
+      "园林周边"
+    ],
+    "description": "坐落于十全街的文化复合空间，融合阅读、茶饮与江南美学，邻近网师园，适合慢节奏休憩与人文体验。",
+    "cost_range": "¥30-¥50",
+    "suitable_for": [
+      "文艺青年",
+      "书友",
+      "轻旅行者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e173bd000000001d02ccc6",
+    "source_likes": 1291,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "网师园",
+    "address": "苏州市姑苏区阔家头巷11号",
+    "city": "苏州",
+    "tags": [
+      "世界文化遗产",
+      "苏州园林",
+      "夜游园林",
+      "玉兰观赏点"
+    ],
+    "description": "以精巧著称的古典园林，三月玉兰盛开于殿春簃等区域，是苏州春季最具代表性的赏花园林之一。",
+    "cost_range": "¥40（日间）/ ¥80（夜游）",
+    "suitable_for": [
+      "园林深度爱好者",
+      "摄影游客",
+      "文化体验者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e173bd000000001d02ccc6",
+    "source_likes": 1291,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "罗汉院双塔",
+    "address": "苏州市姑苏区定慧寺巷27号",
+    "city": "苏州",
+    "tags": [
+      "宋代古建",
+      "双塔",
+      "小众历史景点",
+      "清净打卡"
+    ],
+    "description": "北宋遗存双塔建筑群，苏州古城内罕见的宋代砖塔，环境清幽，是citywalk中兼具历史感与出片感的冷门宝藏。",
+    "cost_range": null,
+    "suitable_for": [
+      "历史爱好者",
+      "建筑爱好者",
+      "静谧旅行者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e173bd000000001d02ccc6",
+    "source_likes": 1291,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "香雪海景区",
+    "address": "苏州市吴中区光福镇",
+    "city": "苏州",
+    "tags": [
+      "赏樱胜地",
+      "徒步起点",
+      "太湖风光",
+      "春季花海"
+    ],
+    "description": "光福古镇核心景区，以‘香雪海’梅花闻名，春季亦有桃花、山花环绕；为‘光福樱花线’徒步起点，可眺望太湖。",
+    "cost_range": "¥30-¥45",
+    "suitable_for": [
+      "徒步爱好者",
+      "自然爱好者",
+      "自驾游客",
+      "春季赏花人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e173bd000000001d02ccc6",
+    "source_likes": 1291,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "网师园",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏州园林",
+      "玉兰花",
+      "赏花",
+      "拍照圣地"
+    ],
+    "description": "苏州经典古典园林，早春白玉兰盛开，人流量大，建议开门即入拍空景。",
+    "cost_range": "¥40",
+    "suitable_for": [
+      "摄影爱好者",
+      "园林文化爱好者",
+      "一日游游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/699eb51100000000220229e2",
+    "source_likes": 1188,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "静思书院",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏州园林",
+      "文化空间",
+      "小众打卡"
+    ],
+    "description": "位于苏州古城内的静谧书院，融合古建与现代阅读空间，常作为玉兰季Citywalk中途休憩与出片点。",
+    "cost_range": null,
+    "suitable_for": [
+      "文艺青年",
+      "亲子家庭",
+      "Citywalk参与者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6963a7cb000000002103fb71",
+    "source_likes": 1115,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "双塔寺",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "佛教古迹",
+      "宋代双塔",
+      "小众景点",
+      "苏州园林周边"
+    ],
+    "description": "苏州著名古刹，以东西并立的宋代七级砖塔闻名，庭院内亦植玉兰，清幽古朴。",
+    "cost_range": null,
+    "suitable_for": [
+      "历史文化爱好者",
+      "摄影爱好者",
+      "静心游览者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69216adb000000001e00f400",
+    "source_likes": 1046,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "耦园",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏州园林",
+      "玉兰花",
+      "世界文化遗产",
+      "爱情主题园林"
+    ],
+    "description": "以‘偶’为名的典型江南园林，东园玉兰盛放时极具诗意，需早到避开人流。",
+    "cost_range": "¥30（常规票价，笔记未明示但属标准价）",
+    "suitable_for": [
+      "情侣",
+      "摄影爱好者",
+      "园林深度体验者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/692ec675000000001f008959",
+    "source_likes": 1044,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "狮子林",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏州园林",
+      "假山王国",
+      "世界文化遗产",
+      "网红打卡"
+    ],
+    "description": "以奇石假山著称的元代园林，玉兰季与太湖石相映成趣，兼具趣味性与观赏性。",
+    "cost_range": "¥40",
+    "suitable_for": [
+      "家庭游客",
+      "摄影爱好者",
+      "传统文化体验者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e6a4bb000000000903b38c",
+    "source_likes": 1043,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "苏州万象天地",
+    "address": "苏州市姑苏区金石街（石路天虹北侧约110米）",
+    "city": "苏州",
+    "tags": [
+      "商业综合体",
+      "潮玩打卡",
+      "拍照圣地",
+      "美食聚集地"
+    ],
+    "description": "苏州新兴城市生活地标，融合现代设计与在地文化，含Funtopia游乐装置、花瓶广场等强出片点。",
+    "cost_range": null,
+    "suitable_for": [
+      "年轻人",
+      "亲子家庭",
+      "时尚爱好者",
+      "美食探索者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e6a4bb000000000903b38c",
+    "source_likes": 1043,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "乌鹊桥",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "历史桥梁",
+      "苏州中轴线",
+      "古城漫步"
+    ],
+    "description": "苏州古城重要历史地标，始建于春秋，现存为重建，是贯穿苏州南北中轴线的核心节点。",
+    "cost_range": null,
+    "suitable_for": [
+      "历史文化爱好者",
+      "Citywalk参与者",
+      "摄影爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e6a4bb000000000903b38c",
+    "source_likes": 1043,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "苏州公园",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "城市公园",
+      "市民休闲",
+      "民国风",
+      "中轴线节点"
+    ],
+    "description": "苏州最早的现代公园之一，毗邻平江路与观前街，融合自然景观与民国建筑元素。",
+    "cost_range": null,
+    "suitable_for": [
+      "本地居民",
+      "游客休憩者",
+      "Citywalk中途站点"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e6a4bb000000000903b38c",
+    "source_likes": 1043,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "玄妙观",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "道教宫观",
+      "千年古观",
+      "观前街核心",
+      "苏州地标"
+    ],
+    "description": "创建于西晋的著名道观，苏州最古老宗教建筑群，观前街核心，玉兰季门前古树亦可观。",
+    "cost_range": "¥5（常规香花券）",
+    "suitable_for": [
+      "文化朝圣者",
+      "历史爱好者",
+      "游客必访地"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e6a4bb000000000903b38c",
+    "source_likes": 1043,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "北寺塔",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "佛塔",
+      "苏州最高古塔",
+      "中轴线北端",
+      "登高望远"
+    ],
+    "description": "报恩寺塔，始建于三国，苏州古城制高点，中轴线终点，可俯瞰平江图式水巷格局。",
+    "cost_range": "¥25",
+    "suitable_for": [
+      "登高爱好者",
+      "历史爱好者",
+      "Citywalk终点打卡者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e6a4bb000000000903b38c",
+    "source_likes": 1043,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "周庄古镇",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "江南水乡",
+      "古镇旅游",
+      "世界文化遗产预备名录",
+      "热门景区"
+    ],
+    "description": "被誉为‘神州第一水乡’，以双桥、沈厅、古宅水巷和夜游画舫著称，门票100元。",
+    "cost_range": "¥100",
+    "suitable_for": [
+      "首次访苏游客",
+      "摄影爱好者",
+      "文化深度游者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e6a4bb000000000903b38c",
+    "source_likes": 1043,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "光福樱花谷",
+    "address": "苏州市吴中区光福镇石嵝停车场周边",
+    "city": "苏州",
+    "tags": [
+      "徒步路线",
+      "樱花季",
+      "小众赏樱",
+      "山野踏青"
+    ],
+    "description": "光福山区隐秘樱花带，环线徒步6公里，结合土路与盛放樱花谷，适合家庭及轻徒步人群。",
+    "cost_range": null,
+    "suitable_for": [
+      "徒步爱好者",
+      "亲子家庭",
+      "避峰赏花者",
+      "春季户外爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67e6a4bb000000000903b38c",
+    "source_likes": 1043,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "台式小食堂",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "台式料理",
+      "寿喜锅",
+      "鳗鱼饭",
+      "氛围感餐厅",
+      "苏州约会餐厅"
+    ],
+    "description": "苏州一家有氛围感的台式小食堂，主打冒热气的寿喜锅和鳗鱼饭，适合降温天食用，被笔记作者和朋友一致推荐。",
+    "cost_range": null,
+    "suitable_for": [
+      "朋友聚餐",
+      "情侣约会",
+      "喜欢台式风味的人"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/68ff0b25000000000700e066",
+    "source_likes": 920,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "拙政园",
+    "address": "江苏省苏州市姑苏区东北街178号",
+    "city": "苏州",
+    "tags": [
+      "苏州园林",
+      "热门景点",
+      "导游推荐",
+      "古建拍照",
+      "苏州旅游"
+    ],
+    "description": "中国四大名园之一，笔记中强调节假日需请导游快速入园并深度讲解，是苏州核心文化地标与热门Citywalk打卡点。",
+    "cost_range": "¥50（导游附加费）",
+    "suitable_for": [
+      "文化爱好者",
+      "家庭游客",
+      "摄影爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/695e61bf000000001a01e373",
+    "source_likes": 909,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "虎丘山风景区",
+    "address": "江苏省苏州市姑苏区虎丘山门内8号",
+    "city": "苏州",
+    "tags": [
+      "苏州景点",
+      "历史名胜",
+      "虎丘塔",
+      "苏州旅游"
+    ],
+    "description": "苏州标志性风景区，笔记提及游览体验，虽内容被截断，但明确列为行程重点，具深厚吴文化背景与自然人文景观。",
+    "cost_range": null,
+    "suitable_for": [
+      "历史爱好者",
+      "轻度徒步者",
+      "家庭游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69a2b68b000000001a022f61",
+    "source_likes": 894,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "平江路",
+    "address": "江苏省苏州市姑苏区平江路",
+    "city": "苏州",
+    "tags": [
+      "古街",
+      "小桥流水",
+      "Citywalk",
+      "拍照机位",
+      "苏州园林周边"
+    ],
+    "description": "苏州保存最完整的历史街区之一，笔记标注为青石板巷弄+小桥流水的经典取景地，适合人物与古建同框拍摄。",
+    "cost_range": null,
+    "suitable_for": [
+      "游客",
+      "摄影爱好者",
+      "喜欢慢节奏漫步的人"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/691942650000000007016182",
+    "source_likes": 826,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "狮子林",
+    "address": "江苏省苏州市姑苏区园林路23号",
+    "city": "苏州",
+    "tags": [
+      "苏州园林",
+      "假山奇石",
+      "古风拍照",
+      "园林摄影"
+    ],
+    "description": "以太湖石假山群闻名的古典园林，笔记推荐在假山缝隙中取景，突出错落有致的奇石与亭台结构感。",
+    "cost_range": null,
+    "suitable_for": [
+      "摄影爱好者",
+      "园林文化爱好者",
+      "亲子家庭"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69a021cf000000001b0152d7",
+    "source_likes": 781,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "山塘街",
+    "address": "江苏省苏州市姑苏区山塘街",
+    "city": "苏州",
+    "tags": [
+      "古街",
+      "夜景",
+      "灯笼流水",
+      "苏州旅游",
+      "拍照机位"
+    ],
+    "description": "千年历史古街，笔记强调其夜晚两岸灯笼与流水的氛围感，是经典夜游与出片目的地。",
+    "cost_range": null,
+    "suitable_for": [
+      "夜游爱好者",
+      "摄影爱好者",
+      "游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69a021cf000000001b0152d7",
+    "source_likes": 781,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "苏州博物馆",
+    "address": "江苏省苏州市姑苏区东北街204号",
+    "city": "苏州",
+    "tags": [
+      "建筑美学",
+      "贝聿铭设计",
+      "几何建筑",
+      "简约高级感",
+      "拍照机位"
+    ],
+    "description": "由贝聿铭设计的现代与传统融合的博物馆，笔记推荐入口处几何建筑作为光线充足、风格简约的拍照点。",
+    "cost_range": null,
+    "suitable_for": [
+      "建筑爱好者",
+      "摄影爱好者",
+      "文化游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69a021cf000000001b0152d7",
+    "source_likes": 781,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "网师园",
+    "address": "江苏省苏州市姑苏区阔家头巷11号",
+    "city": "苏州",
+    "tags": [
+      "夜游园林",
+      "月到风来亭",
+      "园林夜景",
+      "温柔出片"
+    ],
+    "description": "以精巧雅致著称的苏州古典园林，笔记特别推荐‘月到风来亭’拍摄夜景，营造温柔浪漫氛围。",
+    "cost_range": null,
+    "suitable_for": [
+      "夜游爱好者",
+      "摄影爱好者",
+      "追求静谧体验的游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69a021cf000000001b0152d7",
+    "source_likes": 781,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "树山",
+    "address": "江苏省苏州市虎丘区通安镇树山村",
+    "city": "苏州",
+    "tags": [
+      "徒步",
+      "自然森林",
+      "翡翠湖",
+      "姑苏小九寨",
+      "亲子友好"
+    ],
+    "description": "苏州近郊生态村落，笔记提供详细木栈道徒步路线（云泉寺、摩崖石刻、竹海、杨梅岭等），全程无台阶，适合全龄段轻徒步。",
+    "cost_range": null,
+    "suitable_for": [
+      "徒步爱好者",
+      "亲子家庭",
+      "宠物友好出行者",
+      "自然疗愈需求者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69a021cf000000001b0152d7",
+    "source_likes": 781,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "大阳山翡翠湖",
+    "address": "江苏省苏州市虎丘区大阳山国家森林公园内",
+    "city": "苏州",
+    "tags": [
+      "湖泊",
+      "翡翠色湖水",
+      "自然风光",
+      "徒步终点"
+    ],
+    "description": "位于大阳山森林公园内的高颜值湖泊，笔记将其与树山徒步组合为一日轻旅行路线，以水色清透、环境静谧为特色。",
+    "cost_range": null,
+    "suitable_for": [
+      "自然爱好者",
+      "摄影爱好者",
+      "轻度假人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69a021cf000000001b0152d7",
+    "source_likes": 781,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "新苏苑一期",
+    "address": "江苏省苏州市姑苏区新苏苑（具体门牌未详，属城区住宅区）",
+    "city": "苏州",
+    "tags": [
+      "海棠花",
+      "春季赏花",
+      "垂丝海棠",
+      "城市秘境",
+      "粉色浪漫"
+    ],
+    "description": "笔记中私藏的春季赏花点，三月末盛放垂丝海棠形成‘海棠瀑布’，位于居民区附近，具偶然邂逅式的诗意与生活气息。",
+    "cost_range": null,
+    "suitable_for": [
+      "赏花爱好者",
+      "春日漫步者",
+      "文艺摄影者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69a021cf000000001b0152d7",
+    "source_likes": 781,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "嘟嘟DUDU FARM·亲子乐园·露营营地",
+    "address": "苏州西山岛",
+    "city": "苏州",
+    "tags": [
+      "亲子乐园",
+      "露营营地",
+      "农场体验",
+      "户外游玩",
+      "遛娃好去处"
+    ],
+    "description": "苏州西山岛上的新西兰风格亲子农场乐园，提供草地滑坡、萌宠互动、霍比特小屋等项目，适合家庭度假与拍照出片。",
+    "cost_range": "成人42.1元，儿童23.8元",
+    "suitable_for": [
+      "家庭",
+      "儿童",
+      "亲子游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6914a55f0000000004006c23",
+    "source_likes": 478,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "定慧寺",
+    "address": "苏州市姑苏区定慧寺巷",
+    "city": "苏州",
+    "tags": [
+      "古寺",
+      "免费景点",
+      "祈福",
+      "citywalk",
+      "历史建筑"
+    ],
+    "description": "苏州历史悠久的古刹，内有百年银杏，可免费进入，提供2元香供游客祈福，是citywalk路线起点。",
+    "cost_range": null,
+    "suitable_for": [
+      "游客",
+      "文化爱好者",
+      "静心人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/692bbdc7000000001d03b233",
+    "source_likes": 475,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "双塔集市",
+    "address": "苏州市姑苏区双塔片区（近苏州公园）",
+    "city": "苏州",
+    "tags": [
+      "市集",
+      "本地生活",
+      "美食集合",
+      "citywalk",
+      "小众打卡"
+    ],
+    "description": "融合传统与潮流的社区型市集，位于双塔历史文化街区，汇聚本地餐饮与文创，是苏州citywalk路线中的活力节点。",
+    "cost_range": null,
+    "suitable_for": [
+      "年轻人",
+      "游客",
+      "美食爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/68da25550000000013028715",
+    "source_likes": 449,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "五卅路（同益里和同德里）",
+    "address": "苏州市姑苏区五卅路",
+    "city": "苏州",
+    "tags": [
+      "民国建筑",
+      "历史街区",
+      "摄影打卡",
+      "citywalk",
+      "静谧小巷"
+    ],
+    "description": "保存完好的民国风貌里弄建筑群，青砖黛瓦、石库门风格，兼具历史感与文艺氛围，适合慢行与人文摄影。",
+    "cost_range": null,
+    "suitable_for": [
+      "游客",
+      "摄影爱好者",
+      "文化探索者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/68e7331600000000030224b6",
+    "source_likes": 442,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "红地道湘菜馆",
+    "address": "苏州市工业园区娄葑街道",
+    "city": "苏州",
+    "tags": [
+      "湘菜",
+      "苍蝇馆子",
+      "本地美食",
+      "辣味餐厅",
+      "网红老店"
+    ],
+    "description": "苏州少有的地道未改良湘菜馆，以鲜辣过瘾著称，常年排队，被本地人及游客反复打卡。",
+    "cost_range": null,
+    "suitable_for": [
+      "辣味爱好者",
+      "本地食客",
+      "游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67bdae4c000000002901f056",
+    "source_likes": 402,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "刁记夜伴麻辣烫",
+    "address": "苏州市姑苏区江南文化创业园",
+    "city": "苏州",
+    "tags": [
+      "东北麻辣烫",
+      "苍蝇馆子",
+      "夜宵",
+      "咸辣口味",
+      "居民区美食"
+    ],
+    "description": "主打东北老式风味的麻辣烫小店，鸭血炒鸡为招牌，藏在创意园区内，烟火气十足。",
+    "cost_range": null,
+    "suitable_for": [
+      "年轻人",
+      "夜宵党",
+      "口味偏好重咸辣者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67bdae4c000000002901f056",
+    "source_likes": 402,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "李娘娘云南小锅米线",
+    "address": "苏州市吴中区盛城路",
+    "city": "苏州",
+    "tags": [
+      "云南米线",
+      "苍蝇馆子",
+      "地方小吃",
+      "居民区美食"
+    ],
+    "description": "地道云南风味小锅米线，汤头酸辣鲜香，食材现煮，藏于吴中区居民区，本地人私藏推荐。",
+    "cost_range": null,
+    "suitable_for": [
+      "米线爱好者",
+      "游客",
+      "日常简餐人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67bdae4c000000002901f056",
+    "source_likes": 402,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "半月斋",
+    "address": "苏州市姑苏区十全街916号",
+    "city": "苏州",
+    "tags": [
+      "苏帮菜",
+      "苏式点心",
+      "非遗餐厅",
+      "私房菜",
+      "精致正餐"
+    ],
+    "description": "由双非遗传承人主理的苏帮菜与苏式面点餐厅，一楼售传统点心，二楼提供私房宴席，融合传统技艺与现代体验。",
+    "cost_range": null,
+    "suitable_for": [
+      "美食深度体验者",
+      "文化旅行者",
+      "家庭聚餐"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67bdae4c000000002901f056",
+    "source_likes": 402,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "阳澄湖半岛田园",
+    "address": "苏州市工业园区阳澄湖半岛",
+    "city": "苏州",
+    "tags": [
+      "田园风光",
+      "采摘体验",
+      "萌宠乐园",
+      "露营烧烤",
+      "春日拍照"
+    ],
+    "description": "开放式的生态田园景区，含花海、稻草城堡、向日葵田、儿童探险乐园等，适合春季遛娃与外景拍摄。",
+    "cost_range": null,
+    "suitable_for": [
+      "家庭",
+      "亲子游客",
+      "摄影爱好者",
+      "户外休闲人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67bdae4c000000002901f056",
+    "source_likes": 402,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "网师园",
+    "address": "苏州市姑苏区阔家头巷11号",
+    "city": "苏州",
+    "tags": [
+      "苏州园林",
+      "赏玉兰",
+      "古典园林",
+      "春日打卡"
+    ],
+    "description": "苏州著名古典园林，玉兰季重点推荐地，五峰书屋、小山丛桂轩连廊等处玉兰盛放，花期短而惊艳。",
+    "cost_range": "¥20",
+    "suitable_for": [
+      "摄影爱好者",
+      "园林文化爱好者",
+      "外地游客",
+      "春季赏花人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69b20e17000000001d02701e",
+    "source_likes": 394,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "双塔",
+    "address": "苏州市姑苏区定慧寺巷34号",
+    "city": "苏州",
+    "tags": [
+      "古塔",
+      "玉兰观赏",
+      "城市地标",
+      "拍照圣地"
+    ],
+    "description": "北宋双塔古迹，春季白玉兰与古塔同框极具画面感，周边含吴作人艺术馆、定慧寺等文化点。",
+    "cost_range": "免费（双塔景区外部可自由拍摄；内部需预约或购票）",
+    "suitable_for": [
+      "摄影爱好者",
+      "City Walk人群",
+      "本地休闲人群",
+      "春季打卡游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69ae317d000000000e00d982",
+    "source_likes": 381,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "柴园",
+    "address": "苏州市姑苏区醋坊桥下塘8号",
+    "city": "苏州",
+    "tags": [
+      "小众园林",
+      "苏州园林",
+      "静谧赏花",
+      "巷弄秘境"
+    ],
+    "description": "藏于平江路附近巷子中的清代私家园林，人少景雅，白玉兰正值盛花期，兼有杏花待放。",
+    "cost_range": "¥15",
+    "suitable_for": [
+      "园林深度游者",
+      "避开人流的游客",
+      "人文摄影爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/680ce620000000001201e885",
+    "source_likes": 373,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "静思书院",
+    "address": "苏州市姑苏区十梓街1号（苏州大学本部内）",
+    "city": "苏州",
+    "tags": [
+      "书院",
+      "校园景点",
+      "文化空间",
+      "玉兰待放"
+    ],
+    "description": "位于苏州大学内的文艺书院，庭院栽有玉兰，当前花苞未绽，属春日期待点位。",
+    "cost_range": "免费（校内开放时段可入）",
+    "suitable_for": [
+      "学生群体",
+      "文艺青年",
+      "校园漫步者",
+      "早春探访者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/699d1544000000001a02252d",
+    "source_likes": 291,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "南园宾馆",
+    "address": "苏州市姑苏区带城桥路99号",
+    "city": "苏州",
+    "tags": [
+      "民国建筑",
+      "玉兰观赏",
+      "梅花同赏",
+      "历史酒店"
+    ],
+    "description": "苏州老牌园林式宾馆，庭院内玉兰满枝、梅花正盛，兼具历史风貌与春日景观。",
+    "cost_range": "住宿价格较高；外部庭院部分区域可观赏（非住客建议确认开放政策）",
+    "suitable_for": [
+      "文化体验者",
+      "摄影爱好者",
+      "怀旧风爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/691ddd7a000000001b020f39",
+    "source_likes": 286,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "美人腿风景区·丛林乐园（法式农场）",
+    "address": "苏州市相城区阳澄湖镇（美人腿风景区内）",
+    "city": "苏州",
+    "tags": [
+      "亲子农场",
+      "法式风格",
+      "阳澄湖畔",
+      "遛娃胜地",
+      "小众打卡"
+    ],
+    "description": "阳澄湖畔新开设的沉浸式法式主题农场，含咖啡屋、道具布景与湖景，主打亲子休闲与高颜值出片。",
+    "cost_range": "¥68（成人票，含基础体验）",
+    "suitable_for": [
+      "亲子家庭",
+      "年轻情侣",
+      "露营/户外爱好者",
+      "摄影打卡人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/691ddd7a000000001b020f39",
+    "source_likes": 286,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "祝甸砖窑文化馆",
+    "address": "昆山市锦溪镇祝甸村（靠近长白荡、明镜荡，毗邻淀山湖）",
+    "city": "苏州",
+    "tags": [
+      "历史遗迹探寻",
+      "小众文艺地",
+      "红砖建筑之美",
+      "工业风建筑",
+      "祝甸古窑遗址",
+      "秋日氛围感"
+    ],
+    "description": "原为明代御用金砖官窑遗址，改造为文化展馆，三面环水，融合历史印记与乡村秋景，适合自驾探访的文艺打卡地。",
+    "cost_range": null,
+    "suitable_for": [
+      "历史爱好者",
+      "摄影爱好者",
+      "文艺青年",
+      "自驾游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69189cd600000000040007d2",
+    "source_likes": 228,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "西园寺",
+    "address": "苏州市姑苏区留园路西园弄18号",
+    "city": "苏州",
+    "tags": [
+      "寺庙",
+      "江南园林",
+      "猫咪圣地",
+      "素斋",
+      "情侣打卡",
+      "心灵疗愈"
+    ],
+    "description": "苏州著名禅宗寺院，以萌猫出没、静谧古典园林和5元门票内可敬香、品尝素面素包而广受情侣及游客喜爱。",
+    "cost_range": "¥5",
+    "suitable_for": [
+      "情侣",
+      "佛教文化爱好者",
+      "素食者",
+      "亲子家庭",
+      "城市放松者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/67eced02000000001c0132f8",
+    "source_likes": 227,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "旺山景区",
+    "address": "苏州市吴中区旺山村",
+    "city": "苏州",
+    "tags": [
+      "自然风光",
+      "古村",
+      "古刹",
+      "情侣漫步",
+      "踏青赏花",
+      "治愈系公园"
+    ],
+    "description": "集山水、古村、古寺于一体的生态景区，环境清幽，适合情侣慢行、拍照及沉浸式感受江南山野浪漫。",
+    "cost_range": null,
+    "suitable_for": [
+      "情侣",
+      "徒步爱好者",
+      "摄影爱好者",
+      "自然疗愈需求者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/68c12fb4000000001d002ed7",
+    "source_likes": 205,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "虎丘湿地公园",
+    "address": "苏州市相城区春申湖西路",
+    "city": "苏州",
+    "tags": [
+      "湿地公园",
+      "净水花园",
+      "自在之地咖啡店",
+      "观鸟喂鹅",
+      "秋日捡拾",
+      "城市吸氧地"
+    ],
+    "description": "生态型湿地公园，拥有‘净水花园’观鱼步道、湖景咖啡店‘自在之地’及丰富植被，是避世放松与轻度休闲的理想场所。",
+    "cost_range": null,
+    "suitable_for": [
+      "亲子家庭",
+      "摄影爱好者",
+      "自然爱好者",
+      "咖啡休闲人群",
+      "城市减压者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69551987000000002202c5b7",
+    "source_likes": 202,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "太湖湿地公园",
+    "address": "苏州市吴中区东山大道太湖国家湿地公园",
+    "city": "苏州",
+    "tags": [
+      "湿地公园",
+      "鹿群观赏",
+      "生态互动",
+      "租车游览",
+      "亲子遛娃",
+      "人少景美"
+    ],
+    "description": "以散养梅花鹿为特色，东门附近易遇鹿群；提供自助租车服务，适合家庭探索自然与动物互动。",
+    "cost_range": "¥100/小时（租车）",
+    "suitable_for": [
+      "亲子家庭",
+      "动物爱好者",
+      "自然探索者",
+      "轻度户外人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/68da436e000000000b03ef3a",
+    "source_likes": 191,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "天平山",
+    "address": "苏州市吴中区灵天路",
+    "city": "苏州",
+    "tags": [
+      "赏枫胜地",
+      "名山古迹",
+      "石刻文化",
+      "登高吸氧",
+      "秋日限定"
+    ],
+    "description": "范仲淹故里，以“红枫、奇石、清泉”三绝著称，秋季层林尽染，是苏州经典且能量充沛的登山吸氧地。",
+    "cost_range": null,
+    "suitable_for": [
+      "登山爱好者",
+      "摄影爱好者",
+      "文化探寻者",
+      "秋日旅行者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/68da436e000000000b03ef3a",
+    "source_likes": 191,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "虞山",
+    "address": "常熟市虞山街道",
+    "city": "苏州",
+    "tags": [
+      "城市山林",
+      "晒太阳好去处",
+      "面食文化",
+      "常熟地标",
+      "高频复访地"
+    ],
+    "description": "常熟标志性山体，兼具自然步道、文化古迹与市井烟火气，当地人常来晒太阳、吃面、放空，充满生活松弛感。",
+    "cost_range": null,
+    "suitable_for": [
+      "本地居民",
+      "慢节奏旅行者",
+      "面食爱好者",
+      "阳光疗愈需求者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/68da436e000000000b03ef3a",
+    "source_likes": 191,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "金鸡湖",
+    "address": "苏州市工业园区",
+    "city": "苏州",
+    "tags": [
+      "城市湖景",
+      "右岸步道",
+      "跑步圣地",
+      "国际感滨水空间",
+      "夕阳打卡"
+    ],
+    "description": "现代化城市湖泊，右岸景观升级后具海外滨水氛围，是市民晨跑、骑行、观夕阳及感受都市自然融合的活力地带。",
+    "cost_range": null,
+    "suitable_for": [
+      "运动爱好者",
+      "都市漫步者",
+      "摄影爱好者",
+      "年轻上班族"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/68da436e000000000b03ef3a",
+    "source_likes": 191,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "半秋西餐厅",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "西餐厅",
+      "西餐",
+      "苏州牛排"
+    ],
+    "description": "苏州知名西餐厅，被用户列为本地好吃的西餐代表之一。",
+    "cost_range": null,
+    "suitable_for": [
+      "情侣",
+      "朋友聚餐"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6941fb9f000000001f00f252",
+    "source_likes": 139,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "沃夫冈牛排馆",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "西餐厅",
+      "西餐",
+      "苏州牛排"
+    ],
+    "description": "苏州高端牛排馆，主打美式/德式牛排体验。",
+    "cost_range": "高",
+    "suitable_for": [
+      "情侣",
+      "商务宴请",
+      "朋友聚餐"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6986fe0f000000000a029e94",
+    "source_likes": 111,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "裕兴记",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏式面",
+      "苏州小吃"
+    ],
+    "description": "苏州老字号苏式面馆，以枫镇大肉面等传统面食闻名。",
+    "cost_range": "中",
+    "suitable_for": [
+      "本地人",
+      "游客",
+      "上班族"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69b145c9000000000b036dc6",
+    "source_likes": 110,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "朱新年点心店",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏式面",
+      "苏州小吃"
+    ],
+    "description": "苏州知名苏式点心与面食老店，主打汤面、小笼包等传统风味。",
+    "cost_range": "低至中",
+    "suitable_for": [
+      "本地人",
+      "游客",
+      "家庭"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6916cbe60000000004004aba",
+    "source_likes": 98,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "松鹤楼",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏帮菜"
+    ],
+    "description": "苏州百年苏帮菜名店，以松鼠鳜鱼、响油鳝糊等经典菜式著称。",
+    "cost_range": "中至高",
+    "suitable_for": [
+      "游客",
+      "家庭聚餐",
+      "商务宴请"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "得月楼",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏帮菜"
+    ],
+    "description": "另一家历史悠久的苏州本帮菜代表餐厅，位于平江路等核心景区附近。",
+    "cost_range": "中至高",
+    "suitable_for": [
+      "游客",
+      "文化体验者",
+      "家庭"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "哑巴生煎",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏州小吃"
+    ],
+    "description": "苏州标志性生煎馒头品牌，皮脆汁多，分店遍布老城区。",
+    "cost_range": "低",
+    "suitable_for": [
+      "游客",
+      "本地人",
+      "学生"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "赵元章肉骨烧",
+    "address": null,
+    "city": "苏州",
+    "tags": [
+      "苏州小吃"
+    ],
+    "description": "苏州特色卤味小吃连锁，主打酱香浓郁的猪脚、排骨等。",
+    "cost_range": "低",
+    "suitable_for": [
+      "游客",
+      "年轻人",
+      "上班族"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "金鸡湖湖边咖啡店",
+    "address": "苏州工业园区金鸡湖畔（具体店名未明，但指向临湖咖啡空间）",
+    "city": "苏州",
+    "tags": [
+      "湖边咖啡",
+      "松弛感下午茶",
+      "苏州慢生活",
+      "约会好去处"
+    ],
+    "description": "位于金鸡湖畔、拥有落地窗与摩天轮景观的高颜值咖啡馆，强调放空、拍照与舒适休憩体验。",
+    "cost_range": "中",
+    "suitable_for": [
+      "情侣",
+      "朋友",
+      "独处人群",
+      "摄影爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "柴园",
+    "address": "苏州市姑苏区醋库巷44号",
+    "city": "苏州",
+    "tags": [
+      "苏州柴园",
+      "苏州赏花",
+      "玉兰花",
+      "免费游览"
+    ],
+    "description": "清代古典园林，现为苏州园林博物馆分馆，春季玉兰可观，免费开放。",
+    "cost_range": "免费",
+    "suitable_for": [
+      "文化爱好者",
+      "游客",
+      "摄影者",
+      "老年人"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "双塔",
+    "address": "苏州市姑苏区定慧寺巷22号（双塔街区）",
+    "city": "苏州",
+    "tags": [
+      "苏州双塔",
+      "苏州赏花",
+      "玉兰花"
+    ],
+    "description": "宋代古塔及周边历史街区，玉兰季可远观玉兰树，入口处有旅游咨询中心。",
+    "cost_range": "免费（外部参观）",
+    "suitable_for": [
+      "游客",
+      "历史文化爱好者",
+      "摄影者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "DUDU FARM",
+    "address": "苏州市吴中区西山岛（具体地址未详，属西山岛亲子农场）",
+    "city": "苏州",
+    "tags": [
+      "亲子游",
+      "遛娃好去处",
+      "户外",
+      "西山岛"
+    ],
+    "description": "西山岛上大型亲子自然农场，适合低龄儿童互动体验，含动物观赏、户外活动等。",
+    "cost_range": "中",
+    "suitable_for": [
+      "婴幼儿家庭",
+      "亲子家庭",
+      "自然教育者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "苏州太湖万豪酒店",
+    "address": "苏州市吴中区太湖国家旅游度假区环太湖大道999号（近西山岛）",
+    "city": "苏州",
+    "tags": [
+      "住宿",
+      "亲子游",
+      "自驾推荐"
+    ],
+    "description": "毗邻西山岛的国际品牌湖景酒店，提供亲子友好设施与太湖景观。",
+    "cost_range": "高",
+    "suitable_for": [
+      "亲子家庭",
+      "情侣",
+      "度假客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "东太湖S湾红色双层观光巴士",
+    "address": "苏州市吴江区东太湖大道（苏州湾区域）",
+    "city": "苏州",
+    "tags": [
+      "太湖观光",
+      "情侣周末旅行",
+      "小众打卡地",
+      "苏州约会"
+    ],
+    "description": "苏州湾开通的免费红色双层观光巴士，环线25公里，主打180°湖景+地标打卡，试运行期间免费乘坐。",
+    "cost_range": "免费",
+    "suitable_for": [
+      "情侣",
+      "游客",
+      "摄影爱好者",
+      "家庭"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69aa428b000000001a030841",
+    "source_likes": 90,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "东园",
+    "address": "苏州市姑苏区（紧邻护城河）",
+    "city": "苏州",
+    "tags": [
+      "公园",
+      "遛娃",
+      "免费",
+      "自然生态",
+      "投喂动物",
+      "游船"
+    ],
+    "description": "位于姑苏区护城河畔的大型城市公园，绿植丰富、草坪开阔，可投喂天鹅鸭子鸳鸯，提供免费游船和游乐设施，适合亲子休闲。",
+    "cost_range": "免费",
+    "suitable_for": [
+      "家庭",
+      "儿童",
+      "情侣",
+      "老年人"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6803ae0a000000001b03bd20",
+    "source_likes": 88,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "相门",
+    "address": "苏州市姑苏区相门古城墙景区",
+    "city": "苏州",
+    "tags": [
+      "历史遗迹",
+      "古城墙",
+      "拍照打卡",
+      "文化景点"
+    ],
+    "description": "苏州古城八门之一，现存复建的相门城墙及瓮城，融合历史风貌与现代citywalk动线，是东园→仓街路线中的文化节点。",
+    "cost_range": null,
+    "suitable_for": [
+      "游客",
+      "历史文化爱好者",
+      "情侣",
+      "摄影爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/691458a90000000019027b67",
+    "source_likes": 86,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "仁恒仓街",
+    "address": "苏州市姑苏区平江路仓街",
+    "city": "苏州",
+    "tags": [
+      "商业街区",
+      "江南水乡风格",
+      "餐饮购物",
+      "网红打卡"
+    ],
+    "description": "依托平江路历史文化街区延伸打造的滨水商业综合体，融合苏式建筑美学与现代消费场景，含特色餐厅、文创店与临河景观。",
+    "cost_range": "中等",
+    "suitable_for": [
+      "年轻人",
+      "情侣",
+      "家庭",
+      "游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69ac28910000000022033735",
+    "source_likes": 75,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "白鹭园",
+    "address": "苏州工业园区翠薇街101号",
+    "city": "苏州",
+    "tags": [
+      "城市公园",
+      "湖景",
+      "教堂",
+      "日落打卡",
+      "免费景点",
+      "摄影胜地"
+    ],
+    "description": "独墅湖畔的开放式生态公园，以纯白独墅湖基督教堂、水杉林和湖岸日落为三大核心景观，兼具宗教建筑美学与自然光影体验。",
+    "cost_range": "免费",
+    "suitable_for": [
+      "情侣",
+      "摄影爱好者",
+      "年轻人",
+      "散步休闲人群"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69282b54000000001e00d8eb",
+    "source_likes": 72,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "独墅湖基督教堂",
+    "address": "苏州工业园区翠薇街101号 白鹭园内",
+    "city": "苏州",
+    "tags": [
+      "宗教建筑",
+      "地标打卡",
+      "湖景教堂",
+      "电影感拍摄"
+    ],
+    "description": "坐落于白鹭园内的现代主义风格白色教堂，十字架与拱廊设计极简优雅，与独墅湖水面倒影相映成趣，尤以傍晚剪影效果闻名。",
+    "cost_range": "免费（随公园开放）",
+    "suitable_for": [
+      "情侣",
+      "摄影爱好者",
+      "建筑爱好者",
+      "游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69b680d5000000001a02b13d",
+    "source_likes": 63,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "光福樱野园",
+    "address": "苏州市吴中区光福镇（具体地址未详，属光福赏樱小环线核心区域）",
+    "city": "苏州",
+    "tags": [
+      "赏樱胜地",
+      "春季限定",
+      "徒步路线",
+      "山野风光",
+      "免费"
+    ],
+    "description": "光福镇周边以早樱闻名的山野赏花区域，属‘光福赏樱小环线’核心段，沿途可见樱花、杏花、桃花等多类春花，适合轻徒步与亲子踏青。",
+    "cost_range": "免费",
+    "suitable_for": [
+      "家庭",
+      "徒步爱好者",
+      "摄影爱好者",
+      "春季游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69b680d5000000001a02b13d",
+    "source_likes": 63,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "十梓街玉兰大道",
+    "address": "苏州市姑苏区十梓街（饮马桥路口）",
+    "city": "苏州",
+    "tags": [
+      "赏花",
+      "Citywalk",
+      "玉兰花",
+      "苏州古城"
+    ],
+    "description": "白墙黛瓦间盛放的白玉兰大道，春季氛围感极强，适合拍照打卡。",
+    "cost_range": null,
+    "suitable_for": [
+      "游客",
+      "摄影爱好者",
+      "情侣",
+      "家庭"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69b54ff6000000001f0041f6",
+    "source_likes": 15,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "柴园",
+    "address": "苏州市姑苏区醋库巷44号",
+    "city": "苏州",
+    "tags": [
+      "古典园林",
+      "苏州园林",
+      "小众景点",
+      "赏花"
+    ],
+    "description": "清代私家园林，融合江南园林精巧与玉兰观赏，为Citywalk路线中的文化节点。",
+    "cost_range": null,
+    "suitable_for": [
+      "游客",
+      "园林爱好者",
+      "文化体验者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6983f2a2000000000c03503d",
+    "source_likes": 12,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "静思书院",
+    "address": "苏州市姑苏区十全街附近（具体门牌未明，属平江路历史文化街区延伸区域）",
+    "city": "苏州",
+    "tags": [
+      "文化空间",
+      "书店",
+      "Citywalk",
+      "文艺打卡"
+    ],
+    "description": "位于古城核心区的静谧书院，兼具阅读、茶饮与江南美学空间，常为慢游路线休憩点。",
+    "cost_range": null,
+    "suitable_for": [
+      "文艺青年",
+      "游客",
+      "学生",
+      "家庭"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/691413280000000007000460",
+    "source_likes": 9,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "网师园",
+    "address": "苏州市姑苏区阔家头巷11号",
+    "city": "苏州",
+    "tags": [
+      "世界文化遗产",
+      "苏州园林",
+      "夜游推荐",
+      "古典园林"
+    ],
+    "description": "以精致典雅著称的中型古典园林，春季玉兰与园景相映，是Citywalk重点打卡地。",
+    "cost_range": "¥40（旺季）",
+    "suitable_for": [
+      "游客",
+      "园林爱好者",
+      "摄影爱好者",
+      "文化体验者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/69b277bf000000002202f4ed",
+    "source_likes": 8,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "罗汉院双塔",
+    "address": "苏州市姑苏区定慧寺巷27号",
+    "city": "苏州",
+    "tags": [
+      "宋代古建",
+      "双塔",
+      "小众历史遗迹",
+      "Citywalk"
+    ],
+    "description": "全国仅存的宋代双塔实例，幽静古朴，与官太尉河相依，体现苏州古城肌理。",
+    "cost_range": "¥5（或免费开放，部分时段需预约）",
+    "suitable_for": [
+      "历史爱好者",
+      "游客",
+      "摄影爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6940f223000000001e002771",
+    "source_likes": 3,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "艺圃",
+    "address": "苏州市姑苏区文衙弄5号",
+    "city": "苏州",
+    "tags": [
+      "苏州园林",
+      "文人园林",
+      "小众宝藏",
+      "静谧打卡"
+    ],
+    "description": "明代文震孟旧居，以山林野趣见长，游客相对较少，是深度体验苏州园林的优选。",
+    "cost_range": "¥10",
+    "suitable_for": [
+      "园林爱好者",
+      "静心游客",
+      "摄影爱好者",
+      "文化体验者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6940f223000000001e002771",
+    "source_likes": 3,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "苏州乐园海底世界",
+    "address": "苏州市虎丘区长江路488号苏州乐园森林世界商业配套区（商场一楼）",
+    "city": "苏州",
+    "tags": [
+      "海洋馆",
+      "亲子游玩",
+      "情侣约会",
+      "室内景点"
+    ],
+    "description": "位于苏州乐园商圈内的现代化海洋馆，有鲨鱼共舞、海豹表演及企鹅展区，环境洁净，适合周末休闲。",
+    "cost_range": "¥120左右（具体以当日票价为准）",
+    "suitable_for": [
+      "情侣",
+      "亲子家庭",
+      "儿童",
+      "海洋爱好者"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6940f223000000001e002771",
+    "source_likes": 3,
+    "route_suggestions": [],
+    "verified": false
+  },
+  {
+    "name": "苏州乐园森林世界",
+    "address": "苏州市虎丘区象山路99号",
+    "city": "苏州",
+    "tags": [
+      "主题乐园",
+      "亲子游",
+      "花海",
+      "童话风",
+      "春日踏青"
+    ],
+    "description": "大型沉浸式森林主题乐园，春季举办花样春游季，含郁金香/玛格丽特花海、童话小镇、萌宠互动及夜间光影秀。",
+    "cost_range": "¥115（全天票）",
+    "suitable_for": [
+      "亲子家庭",
+      "儿童",
+      "情侣",
+      "年轻游客"
+    ],
+    "source_type": "xiaohongshu",
+    "source_url": "https://www.xiaohongshu.com/explore/6940f223000000001e002771",
+    "source_likes": 3,
+    "route_suggestions": [],
+    "verified": false
+  }
+]
