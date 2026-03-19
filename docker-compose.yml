@@ -28,6 +28,9 @@ services:
     image: redis:7-alpine
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -55,3 +58,4 @@ services:
 volumes:
   pgdata:
   api_logs:
+  redis_data:
