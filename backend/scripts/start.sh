@@ -8,4 +8,4 @@ echo "Starting WWTG Backend..."
 mkdir -p logs
 
 # Start server (table creation handled by FastAPI lifespan)
-exec uvicorn app.main:app --host 0.0.0.0 --port 8000
+exec uvicorn app.main:app --host 0.0.0.0 --port 8000 --log-level info
