@@ -23,6 +23,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Import XHS notes → extract POIs → cache")
     parser.add_argument("file", type=str, help="Path to JSON file with XHS note data")
     parser.add_argument("--city", type=str, required=True, help="City for these notes")
+    parser.add_argument("--batch-offset", type=int, default=0, help="Skip first N notes (resume after interruption)")
     return parser.parse_args()
 
 
@@ -68,6 +69,9 @@ async def main() -> None:
         ))
 
     logger.info("Loaded %d notes from %s", len(notes), filepath.name)
+    if args.batch_offset > 0:
+        notes = notes[args.batch_offset:]
+        logger.info("Skipping first %d notes (--batch-offset), processing %d remaining", args.batch_offset, len(notes))
 
     # Redis
     redis_client = None
