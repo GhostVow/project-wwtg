@@ -282,6 +282,9 @@ class ChatService:
 
         logger.info("generate_plans input: city=%s, pois=%d, rejected=%s",
                      ctx.city, len(pois_data), session.get("rejected_plans"))
+        if pois_data:
+            poi_names = [p.get("name", "?") for p in pois_data[:5]]
+            logger.info("POI names passed to LLM: %s", poi_names)
 
         context_dict = ctx.model_dump()
 
