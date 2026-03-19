@@ -83,8 +83,8 @@ async def main() -> None:
     # DB
     db_session = None
     try:
-        from app.database import async_session
-        db_session = async_session()
+        from app.core.deps import async_session_factory
+        db_session = async_session_factory()
         logger.info("Connected to database")
     except Exception:
         logger.warning("Database not available, skipping DB persist")
