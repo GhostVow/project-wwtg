@@ -226,7 +226,17 @@ class ChatService:
         self, session: dict[str, Any], ctx: UserContext, session_id: str = ""
     ) -> ChatResponse:
         """Parallel-fetch weather + POIs, then generate plans."""
+        from app.services.crawler.config import CITIES as SUPPORTED_CITIES
+
         history: list[dict[str, str]] = session["history"]
+
+        # Check if city is supported
+        if ctx.city and ctx.city not in SUPPORTED_CITIES:
+            supported = "、".join(SUPPORTED_CITIES)
+            reply = f"抱歉，目前只支持 {supported} 的推荐 🙈 其他城市正在筹备中，敬请期待！"
+            session["state"] = ConversationState.COLLECTING
+            history.append({"role": "assistant", "content": reply})
+            return ChatResponse(reply=reply, state=ConversationState.COLLECTING)
 
         try:
             plans = await asyncio.wait_for(
