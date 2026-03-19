@@ -214,7 +214,7 @@ class ChatService:
                 timeout=10.0,
             )
         except asyncio.TimeoutError:
-            logger.warning("Plan generation timed out for session %s", session_id)
+            logger.warning("Plan generation timed out after %ds for session %s", settings.llm_timeout, session_id)
             await analytics.track(
                 "error",
                 session_id=session_id,
