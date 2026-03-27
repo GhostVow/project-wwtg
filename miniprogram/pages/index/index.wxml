@@ -6,6 +6,7 @@
     scroll-y 
     scroll-into-view="{{scrollToView}}"
     scroll-with-animation
+    style="height: {{scrollHeight}}px;"
   >
     <block wx:for="{{messages}}" wx:key="id">
       <!-- 普通消息气泡 -->
