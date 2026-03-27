@@ -1,84 +1,151 @@
 # 周末去呀 🎉
 
-对话式 AI 周末出行助手微信小程序。30 秒内根据你的位置、同行人、偏好，生成个性化周末方案。
+对话式 AI 周末出行助手。30 秒内根据你的位置、同行人、偏好，生成个性化周末方案。
 
-## 技术栈
+> **当前状态：** MVP Demo（苏州 92 个真实 POI，数据来源小红书 + 高德验证）
 
-- **后端：** FastAPI + Python 3.11
-- **LLM：** DeepSeek V3（OpenAI 兼容 API）
-- **数据：** PostgreSQL + Redis
-- **外部 API：** 高德天气 / 地图、小红书数据采集
-- **前端：** 微信小程序
-- **部署：** Docker Compose
+## 🚀 本地 Demo 体验（5 分钟）
 
-## 快速开始
+### 前置条件
 
-### 1. 克隆项目
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) 已安装并运行
+- [微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html) 已安装
+- Git
+
+### Step 1 — 拉取代码
 
 ```bash
-git clone git@github.com:steins-z/project-wwtg.git
+git clone https://github.com/GhostVow/project-wwtg.git
 cd project-wwtg
+git checkout feat/wwtg/dev-m14
 ```
 
-### 2. 配置环境变量
+### Step 2 — 配置环境变量
 
 ```bash
 cp backend/.env.example backend/.env
 ```
 
-编辑 `backend/.env`，填入以下 API Key：
+编辑 `backend/.env`，填入：
 
 | 变量 | 说明 | 必填 | 获取方式 |
 |------|------|------|----------|
-| `LLM_API_KEY` | DeepSeek API Key | ⚠️ 留空用 mock | [platform.deepseek.com](https://platform.deepseek.com) |
-| `WX_APP_ID` | 微信小程序 AppID | 内测可留空 | 微信公众平台 → 开发管理 |
-| `WX_APP_SECRET` | 微信小程序 Secret | 内测可留空 | 微信公众平台 → 开发管理 |
-| `AMAP_API_KEY` | 高德地图 Web API Key | ⚠️ 留空用 mock | [console.amap.com](https://console.amap.com) |
-| `DATABASE_URL` | PostgreSQL 连接串 | Docker 默认值即可 | — |
-| `REDIS_URL` | Redis 连接串 | Docker 默认值即可 | — |
+| `LLM_API_KEY` | 通义千问 API Key | ✅ | [DashScope 控制台](https://dashscope.console.aliyun.com/) |
+| `LLM_BASE_URL` | `https://dashscope.aliyuncs.com/compatible-mode/v1` | ✅ | 固定值 |
+| `LLM_MODEL` | `qwen-plus` | ✅ | 固定值 |
+| `LLM_TIMEOUT` | `90` | 建议填 | LLM 超时秒数 |
+| `AMAP_API_KEY` | 高德地图 Web API Key | 可选 | [高德开放平台](https://console.amap.com) |
 
-> **注意：** 所有 API Key 留空时项目仍可启动，会使用 mock 数据。适合本地开发调试。
+> **没有 API Key？** 联系项目成员获取。不要在群聊/公开渠道分享 Key。
 
-### 3. Docker Compose 启动（推荐）
-
-```bash
-docker-compose up -d
-```
-
-服务启动后：
-- 后端 API：`http://localhost:8000`
-- API 文档：`http://localhost:8000/docs`
-- 健康检查：`http://localhost:8000/health`
-
-查看日志：
-```bash
-docker-compose logs -f backend
-```
-
-停止服务：
-```bash
-docker-compose down
-```
-
-### 4. 本地开发（不用 Docker）
+### Step 3 — 启动服务
 
 ```bash
-# 安装依赖
-cd backend
-pip install -r requirements.txt
-
-# 启动后端
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+docker-compose up -d --build
 ```
 
-需要本地运行 PostgreSQL 和 Redis，或修改 `.env` 中的连接串。
+等待 1-2 分钟，三个容器启动（api + redis + postgres）。
 
-### 5. 微信小程序
+验证：
+```bash
+curl http://localhost:8000/health
+# 返回 {"status":"ok"} 即成功
+```
 
-1. 下载 [微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
-2. 导入 `miniprogram/` 目录
-3. 在 `miniprogram/utils/api.js` 或 `app.js` 中配置后端地址
-4. 预览 / 真机调试
+### Step 4 — 导入 Demo 数据
+
+```bash
+./scripts/seed_data.sh
+```
+
+3 秒完成，写入 92 个苏州真实 POI 到 Redis。
+
+### Step 5 — 打开小程序
+
+1. 微信开发者工具 → **导入项目** → 选择 `miniprogram/` 目录
+2. AppID 选「测试号」即可
+3. **设置 → 项目设置 → 勾选「不校验合法域名」**（否则 localhost 请求会被拦截）
+4. 在模拟器中输入需求，开始体验！
+
+### 试试这些场景 🎯
+
+| 输入 | 预期效果 |
+|------|----------|
+| 苏州带小孩周末去哪，预算200以内 | 亲子方案，太湖/博物馆路线 |
+| 苏州情侣约会，想安静文艺一点 | 平江路/三山岛等文艺路线 |
+| 一个人想在苏州 citywalk | 古巷/园林步行路线 |
+| 4个人去苏州，人均预算100 | 多人友好、性价比路线 |
+| 苏州下雨天能去哪玩 | 室内为主（博物馆/商圈/咖啡馆）|
+
+每个方案可以点击查看详情：停留点、时间安排、导航链接、贴心提示。
+
+不满意可以说「换一个」或提出新偏好，会重新推荐。
+
+---
+
+## 技术栈
+
+- **后端：** FastAPI + Python 3.11
+- **LLM：** Qwen Plus（通义千问，DashScope OpenAI 兼容 API）
+- **数据：** PostgreSQL + Redis（AOF 持久化）
+- **数据来源：** 小红书笔记 → LLM 提取 POI → 高德 API 验证
+- **外部 API：** 高德天气 / 地图 / POI 搜索
+- **前端：** 微信小程序
+- **部署：** Docker Compose
+
+## API 接口
+
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| POST | `/api/v1/chat/message` | 对话（发送需求，返回方案卡片）|
+| GET | `/api/v1/plan/detail/{plan_id}` | 方案详情（停留点、导航、tips）|
+| POST | `/api/v1/plan/select` | 选择方案 |
+| POST | `/api/v1/plan/reject` | 拒绝并重新推荐 |
+| GET | `/health` | 健康检查 |
+| GET | `/docs` | Swagger API 文档 |
+
+## 项目结构
+
+```
+project-wwtg/
+├── backend/
+│   ├── app/
+│   │   ├── api/           # FastAPI 路由（chat, plan, auth）
+│   │   ├── models/        # Pydantic 模型
+│   │   ├── services/      # 业务逻辑
+│   │   │   ├── llm_service.py      # LLM 集成
+│   │   │   ├── chat_service.py     # 对话状态机
+│   │   │   ├── plan_service.py     # 方案生成
+│   │   │   ├── data_service.py     # 数据管线 + POI 提取
+│   │   │   ├── weather_service.py  # 高德天气
+│   │   │   └── map_service.py      # 高德地图/导航
+│   │   ├── pipeline/      # 数据导入脚本
+│   │   └── main.py        # FastAPI 入口
+│   ├── tests/             # pytest 测试
+│   └── .env.example       # 环境变量模板
+├── miniprogram/           # 微信小程序前端
+│   ├── pages/
+│   │   ├── index/         # 对话主页
+│   │   └── plan-detail/   # 方案详情页
+│   └── components/
+│       └── plan-card/     # 方案卡片组件
+├── data/seed/             # Demo 种子数据
+├── scripts/               # 工具脚本（seed_data.sh 等）
+├── docker-compose.yml
+└── docs/                  # PRD、技术文档
+```
+
+## 数据管线
+
+小红书笔记 → LLM 提取真实 POI → 高德 API 验证 → 写入 Redis
+
+```bash
+# 导入笔记并提取 POI（需 LLM API Key）
+docker-compose exec api python -m app.pipeline.import_notes /data/seed/suzhou.json --city 苏州
+
+# 快速导入已提取的 POI（无需 LLM，3 秒）
+./scripts/seed_data.sh
+```
 
 ## 运行测试
 
@@ -88,61 +155,19 @@ pip install -r requirements.txt
 pytest tests/ -v
 ```
 
-当前 59 个测试全部通过。
+## 常见问题
 
-## 项目结构
+| 问题 | 解决方案 |
+|------|----------|
+| `curl http://localhost:8000/health` 无响应 | 检查 Docker 是否运行：`docker-compose ps` |
+| 小程序请求失败 | 确认勾选了「不校验合法域名」 |
+| 推荐结果为空 | 运行 `./scripts/seed_data.sh` 导入数据 |
+| LLM 超时 | 检查 `LLM_API_KEY` 是否正确，网络是否通 |
 
-```
-project-wwtg/
-├── backend/
-│   ├── app/
-│   │   ├── api/           # FastAPI 路由（chat, plan, auth, analytics）
-│   │   ├── models/        # Pydantic 模型（schemas）
-│   │   ├── services/      # 业务逻辑
-│   │   │   ├── crawler/   # 小红书爬虫模块
-│   │   │   ├── llm_service.py      # DeepSeek LLM 集成
-│   │   │   ├── weather_service.py  # 高德天气
-│   │   │   ├── map_service.py      # 高德地图/导航
-│   │   │   ├── chat_service.py     # 对话状态机
-│   │   │   ├── plan_service.py     # 方案生成
-│   │   │   ├── data_service.py     # 数据管线
-│   │   │   └── analytics.py        # 埋点服务
-│   │   ├── pipeline/      # 每日数据采集任务
-│   │   ├── middleware.py   # 请求日志 + 错误处理
-│   │   ├── config.py      # 配置（pydantic-settings）
-│   │   └── main.py        # FastAPI 入口
-│   ├── scripts/
-│   │   └── start.sh       # Docker 启动脚本
-│   ├── tests/             # pytest 测试
-│   ├── .env.example       # 环境变量模板
-│   └── requirements.txt
-├── miniprogram/           # 微信小程序
-│   ├── pages/
-│   │   ├── index/         # 对话主页
-│   │   └── plan-detail/   # 方案详情页
-│   ├── components/
-│   │   └── plan-card/     # 方案卡片组件
-│   └── utils/
-│       └── api.js         # API 客户端
-├── docker-compose.yml
-└── docs/                  # PRD、技术设计、部署指南
-```
+## 上线 Checklist
 
-## 每日数据采集
-
-小红书 POI 数据定时采集（需配置 Cookie）：
-
-```bash
-cd backend
-python -m app.pipeline.daily_runner
-```
-
-⚠️ 首次运行前需要手动获取小红书 Cookie（扫码登录），Cookie 过期时会有 WARNING 日志提示。
-
-## 上线前 Checklist
-
-- [ ] 填入所有真实 API Key
-- [ ] 接入微信真实登录（当前为 stub）
+- [ ] 微信小程序认证 + 真实 AppID
 - [ ] ICP 备案
-- [ ] 小红书 Cookie 配置 + 过期告警通知渠道
-- [ ] Azure Container Apps 部署（参考 `docs/azure-setup-guide.md`）
+- [ ] Azure Container Apps 部署
+- [ ] 上海 + 杭州数据补全
+- [ ] 小红书 Cookie 定时刷新

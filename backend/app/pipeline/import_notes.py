@@ -23,6 +23,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Import XHS notes → extract POIs → cache")
     parser.add_argument("file", type=str, help="Path to JSON file with XHS note data")
     parser.add_argument("--city", type=str, required=True, help="City for these notes")
+    parser.add_argument("--batch-offset", type=int, default=0, help="Skip first N notes (resume after interruption)")
     return parser.parse_args()
 
 
@@ -68,6 +69,9 @@ async def main() -> None:
         ))
 
     logger.info("Loaded %d notes from %s", len(notes), filepath.name)
+    if args.batch_offset > 0:
+        notes = notes[args.batch_offset:]
+        logger.info("Skipping first %d notes (--batch-offset), processing %d remaining", args.batch_offset, len(notes))
 
     # Redis
     redis_client = None
@@ -107,6 +111,62 @@ async def main() -> None:
     logger.info("Extracting POIs from %d notes for %s...", len(notes), args.city)
     pois = await service.process_notes(notes, args.city)
     logger.info("Extracted %d POIs", len(pois))
+
+    # Verify POIs via AMAP geocode
+    if pois and settings.amap_api_key:
+        import httpx
+
+        logger.info("Verifying %d POIs via AMAP...", len(pois))
+        verified_count = 0
+        async with httpx.AsyncClient(timeout=httpx.Timeout(10.0)) as client:
+            for poi in pois:
+                name = poi.name if hasattr(poi, "name") else poi.get("name", "")
+                if not name:
+                    poi.verified = False if hasattr(poi, "verified") else None
+                    continue
+                try:
+                    resp = await client.get(
+                        "https://restapi.amap.com/v3/place/text",
+                        params={
+                            "key": settings.amap_api_key,
+                            "keywords": name,
+                            "city": args.city,
+                            "citylimit": "true",
+                            "output": "JSON",
+                        },
+                    )
+                    data = resp.json()
+                    if data.get("status") == "1" and data.get("pois"):
+                        if hasattr(poi, "__dict__"):
+                            poi.verified = True
+                            amap_poi = data["pois"][0]
+                            poi.address = amap_poi.get("address", poi.address or "")
+                        else:
+                            poi["verified"] = True
+                            amap_poi = data["pois"][0]
+                            poi["address"] = amap_poi.get("address", poi.get("address", ""))
+                        verified_count += 1
+                    else:
+                        if hasattr(poi, "__dict__"):
+                            poi.verified = False
+                        else:
+                            poi["verified"] = False
+                except Exception as e:
+                    logger.warning("AMAP verify failed for %s: %s", name, e)
+                    if hasattr(poi, "__dict__"):
+                        poi.verified = False
+                    else:
+                        poi["verified"] = False
+                await asyncio.sleep(0.2)  # Rate limit
+
+        logger.info("Verified %d/%d POIs via AMAP", verified_count, len(pois))
+    elif pois:
+        logger.warning("AMAP_API_KEY not set — skipping POI verification")
+        for poi in pois:
+            if hasattr(poi, "__dict__"):
+                poi.verified = False
+            else:
+                poi["verified"] = False
 
     if pois:
         await service.cache_pois(args.city, pois)
