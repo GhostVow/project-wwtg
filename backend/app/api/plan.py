@@ -4,7 +4,6 @@ from fastapi import APIRouter
 
 from app.models.schemas import PlanDetail, PlanStop, PlanSource, PlanSelectRequest
 from app.services.analytics import analytics
-from app.services.chat_service import ChatService
 
 router = APIRouter()
 
@@ -13,7 +12,7 @@ router = APIRouter()
 @router.post("/inject-test-plan")
 async def inject_test_plan():
     """Inject a test plan with real nav_links for navigation testing."""
-    chat_service = ChatService.get_instance()
+    from app.api.chat import chat_service
     test_plan = {
         "plan_id": "test-nav",
         "title": "导航测试方案 · 苏州经典三站",
