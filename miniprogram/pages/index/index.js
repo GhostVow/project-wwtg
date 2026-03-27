@@ -9,10 +9,31 @@ Page({
     loading: false,
     loadingText: '思考中...',
     sessionId: null,
+    scrollHeight: 0,
   },
 
   onLoad() {
+    this._calcScrollHeight();
     this.addMessage('assistant', '你好！我是周末搭子 🎉\n告诉我你想在哪个城市玩？和谁一起？有什么特殊需求吗？');
+  },
+
+  _calcScrollHeight() {
+    const query = wx.createSelectorQuery();
+    query.select('.input-area').boundingClientRect();
+    query.selectViewport().fields({ size: true });
+    query.exec((res) => {
+      const inputRect = res[0];
+      const viewport = res[1];
+      if (viewport && inputRect) {
+        // viewport height minus nav bar area (already excluded) minus input area
+        const scrollH = viewport.height - inputRect.height;
+        this.setData({ scrollHeight: scrollH });
+      } else {
+        // Fallback: use system info
+        const sysInfo = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync();
+        this.setData({ scrollHeight: sysInfo.windowHeight - 80 });
+      }
+    });
   },
 
   onInput(e) {
