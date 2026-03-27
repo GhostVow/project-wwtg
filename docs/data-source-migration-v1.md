@@ -190,12 +190,14 @@ POI: {name}
 
 ---
 
-## 七、执行计划（2 天）
+## 七、执行计划（Milestone 制，完成即推进）
 
-| 天数 | 任务 | 产出 |
-|------|------|------|
-| **Day 1** | 高德 POI API 接入 + 字段映射 + daily_runner 改造 + 数据写入 Redis/PG | `amap_poi_service.py` + 改造后的 `daily_runner.py` + `data_service.py` |
-| **Day 2** | LLM 推荐理由 prompt 设计 + 联调测试（苏州 3 场景验证） | `llm_service.py` 新增方法 + 端到端测试通过 |
+| Milestone | 任务 | 产出 |
+|-----------|------|------|
+| **M1** | 高德 POI API 接入 + 字段映射 + daily_runner 改造 + 数据写入 Redis/PG | `amap_poi_service.py` + 改造后的 `daily_runner.py` + `data_service.py` |
+| **M2** | LLM 推荐理由 prompt 设计 + 联调测试（苏州 3 场景验证） | `llm_service.py` 新增方法 + 端到端测试通过 |
+
+M1 完成立刻开 M2，不等时间节点。
 
 **执行人：** SuperCrew
 **前置条件：** Juanjuan 确认方案
